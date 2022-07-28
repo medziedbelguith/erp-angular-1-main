@@ -1,0 +1,18 @@
+<app-controle-acces [avoirAccee]="informationGenerale.verifierAccee('ajouterBonLivraison')"></app-controle-acces>
+
+
+<app-input-bon-livraison
+    *ngIf="informationGenerale.verifierAccee('ajouterBonLivraison')"
+    [lienAjoute]="lienAjoute"
+    [apiList]="apiList"
+    [apiParametres]="apiParametres"
+    [lienModifie]="lienModifie"
+    [lienGetById]="lienGetById"
+    [titreDocument]="titreDocument"
+    [modeTiere]="modeTiere"
+    [titreCrud]="titreCrud"
+    [pageList]="pageList"
+    [titreDocumentTransfert]="titreDocumentTransfert"
+
+></app-input-bon-livraison>
+

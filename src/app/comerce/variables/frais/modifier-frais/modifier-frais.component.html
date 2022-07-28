@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card [hidHeader]="true">
+            <!-- Partie Header -->
+            <div class="form-group row" style="justify-content: space-between !important;">
+                <div class="text-titre">
+                    <h3>Modifier une Frais</h3>
+                </div>
+                <div class="left-button" style="float:right;">
+                    <button *ngIf="!isLoading" class="btn btn-primary" type="button" (click)="modifierFrais()">
+                        Modifier
+                    </button>
+                    <button *ngIf="isLoading" class="btn btn-primary" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Chargement...
+                    </button>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <!-- Partie formulaire à Gauche en haut -->
+                <div class="col-md-6">
+                    <form action="javascript:">
+                        <div class="form-group row">
+                            <label for="libelle" class="col-sm-3 col-form-label">Type</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="type" id="type"
+                                    placeholder="Enter type" [(ngModel)]="frais.type">
+                                <p *ngIf="erreurFrais.type != ''" class="erreur">{{erreurFrais.type}}</p>
+                            </div>
+                            <label for="libelle" class="col-sm-3 col-form-label">Direct</label>
+                            <div class="col-sm-9">
+                                <input type="checkbox" class="form-control" style="margin-top: 10px;"  name="direct" id="direct"
+                                   (click)="clickDirect()" [checked]="frais.direct == 'oui'">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </app-card>
+    </div>
+</div>

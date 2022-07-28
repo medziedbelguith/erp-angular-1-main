@@ -1,0 +1,4 @@
+<app-controle-acces [avoirAccee]="informationGenerale.verifierAccee('modifierBonTravail')"></app-controle-acces>
+
+
+<app-bon-travail-html *ngIf="informationGenerale.verifierAccee('modifierBonTravail')" [titreCrud]="fonctionPartagesService.titreCrud.modifier" ></app-bon-travail-html>

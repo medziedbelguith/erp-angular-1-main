@@ -1,0 +1,95 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card [hidHeader]="true">
+            <!-- Partie Header -->
+            <div class="form-group row" style="justify-content: space-between !important; margin: 0px;">
+                <div class="text-titre">
+                    <h3>Ajouter Charge Societe</h3>
+                </div>
+                <div class="left-button">
+                    <button *ngIf="!isLoading" class="btn btn-primary" (click)="ajoutChargeSociete()">
+                        Enregister
+                    </button>
+                    <button *ngIf="isLoading" class="btn btn-primary" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Chargement...
+                    </button>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <!-- Partie formulaire à Gauche en haut -->
+                <div class="col-sm-6">
+                    <form action="javascript:">
+                        <div class="form-group row">
+                            <label for="date" class="col-sm-4 col-form-label">date</label>
+                            <div class="col-sm-8">
+                                <input type="date" class="form-control" id="date" name="date"
+                                    [(ngModel)]="chargeSociete.date" max="9999-01-01">
+                                <p *ngIf="erreurChargeSociete.date != ''" class="erreur">
+                                    {{erreurChargeSociete.date}}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="montant" class="col-sm-4 col-form-label">montant</label>
+                            <div class="col-sm-8">
+                                <app-input-number-vergule [field]="chargeSociete" key="montant" idUnique="montant222"
+                                    [messageErreur]="erreurChargeSociete.montant"></app-input-number-vergule>
+                                <p *ngIf="erreurChargeSociete.montant != ''" class="erreur">
+                                    {{erreurChargeSociete.montant}}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="modeReglement" class="col-sm-4 col-form-label">Mode Reglement</label>
+                            <div class="col-sm-8">
+                                <app-autocomplete (addElementEvent)="setModeReglementID($event)"
+                                    [keySelected]="keySelectedModeReglement" [objet]="objetModeReglement"
+                                    [articles]="modeReglements" [idSelected]="chargeSociete.modeReglement" [idHtml]="20"
+                                    [bordureRed]="erreurChargeSociete.modeReglement != ''"
+                                    (openAddElementEvent)="openModalAjoutModeReglement()"></app-autocomplete>
+                                <p *ngIf="erreurChargeSociete.modeReglement != ''" class="erreur">
+                                    {{erreurChargeSociete.modeReglement}}</p>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <!-- Partie formulaire à Droite en haut -->
+                <div class="col-md-6">
+                    <form action="javascript:">
+
+                        <div class="form-group row">
+                            <label for="motif" class="col-sm-4 col-form-label">Motif</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="motif" id="motif"
+                                    [(ngModel)]="chargeSociete.motif">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="proprietaire" class="col-sm-4 col-form-label">Proprietaire</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="proprietaire" id="proprietaire"
+                                    [(ngModel)]="chargeSociete.proprietaire">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="proprietaire" class="col-sm-4 col-form-label">Notes</label>
+                            <div class="col-sm-8">
+                                <textarea class="form-control" id="notes" name="notes"
+                                [(ngModel)]="chargeSociete.notes"></textarea>
+                            </div>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </app-card>
+    </div>
+</div>
+<app-add-element-modal [isLoading]="isLoading" [isOpenModalAjoutElement]="isOpenModalAjoutElement"
+    [idAjoutElementModal]="idAjoutElementModal" (closeModalAjoutElement)="closeModalAjoutElement()"
+    [typeElement]="typeElement"></app-add-element-modal>

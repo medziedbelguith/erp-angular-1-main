@@ -1,0 +1,110 @@
+<div class="row">
+    <div class="col-sm-12 min-Width">
+        <app-card [hidHeader]="true">
+            <!-- Partie Header -->
+            
+            <div class="row">
+                <!-- Partie formulaire à Gauche en haut -->
+                <div class="col-md-12">
+                    <form action="javascript:">
+                        <div class="form-group row">
+                            <label for="nom" class="col-sm-3 col-form-label">Nom</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="nom" id="nom"
+                                    placeholder="Entre nom" [(ngModel)]="utilisateur.nom">
+                                <p *ngIf="erreurUtilisateur.nom != ''" class="erreur">{{erreurUtilisateur.nom}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="prenom" class="col-sm-3 col-form-label">Prenom</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="prenom" id="prenom"
+                                    placeholder="Entre Prenom" [(ngModel)]="utilisateur.prenom">
+                                <p *ngIf="erreurUtilisateur.prenom != ''" class="erreur">{{erreurUtilisateur.prenom}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="role" class="col-sm-3 col-form-label">Role</label>
+                            <div class="col-sm-9">
+                                <select style="width: 100%;" name="role" id="role" [(ngModel)]="utilisateur.role">
+                                    <option  value=""></option>
+                                    <option *ngFor="let role of roles" value="{{role.id}}">{{role.libelle}}</option>
+                                </select>
+                                <p *ngIf="erreurUtilisateur.role != ''" class="erreur">{{erreurUtilisateur.role}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="tel" class="col-sm-3 col-form-label">Téléphone</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="telephone" id="telephone"
+                                    placeholder="Entre Téléphone" [(ngModel)]="utilisateur.telephone">
+                                <p *ngIf="erreurUtilisateur.telephone != ''" class="erreur">{{erreurUtilisateur.telephone}}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="nom" class="col-sm-3 col-form-label">Login</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="login" id="login"
+                                    placeholder="Entre Votre Login" [(ngModel)]="utilisateur.login">
+                                <p *ngIf="erreurUtilisateur.login != ''" class="erreur">{{erreurUtilisateur.login}}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="email" class="col-sm-3 col-form-label">Email</label>
+                            <div class="col-sm-9">
+                                <input type="email" class="form-control" name="email" id="email"
+                                    placeholder="Entre Email" [(ngModel)]="utilisateur.email">
+                                <p *ngIf="erreurUtilisateur.email != ''" class="erreur">{{erreurUtilisateur.email}}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password" class="col-sm-3 col-form-label">Mot de passe</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" name="password" id="password"
+                                    placeholder="Entre votre mot de passe" [(ngModel)]="utilisateur.password">
+                                <p *ngIf="erreurUtilisateur.password != ''" class="erreur">{{erreurUtilisateur.password}}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="confirmationPassword" class="col-sm-3 col-form-label">Confirmation Mot de passe</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" name="confirmationPassword" id="confirmationPassword"
+                                    placeholder="Entre votre confirmation mot de passe" [(ngModel)]="confirmationPassword">
+                                <p *ngIf="erreurConfirmationPassword != ''" class="erreur">{{erreurConfirmationPassword}}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label for="adresse" class="col-sm-3 col-form-label">Adresse</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="adresse" id="adresse"
+                                    placeholder="Entre adresse" [(ngModel)]="utilisateur.adresse">
+                                <p *ngIf="erreurUtilisateur.adresse != ''" class="erreur">{{erreurUtilisateur.adresse}}</p>
+                            </div>
+                        </div>
+                        
+                    </form>
+                </div>
+
+                <hr style="width: 100%; margin-top: 10px; margin-bottom: 5px;">
+  
+                <div style="padding: 10px; text-align: right; padding-top:0px; padding-bottom:0px; width: 100%;">
+                  
+                    <button *ngIf="!isLoading" class="btn btn-primary" (click)="ajoutUtilisateur()"
+                        style="height: 38px; margin-right: 15px;">
+                        Ajouter
+                    </button>
+                    <button *ngIf="isLoading" class="btn btn-primary" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Chargement...
+                    </button>
+              
+                </div>
+            </div>
+        </app-card>
+    </div>
+</div>

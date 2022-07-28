@@ -1,0 +1,248 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card [hidHeader]="true">
+            <!-- Partie Header -->
+            <div class="form-group row" style="justify-content: space-between !important;">
+                    <div class="text-titre">
+                        <h3><span *ngIf="titreCrud != fonctionPartagesService.titreCrud.transfert">{{titreCrud}}</span> Bon Transfert</h3>
+                    </div>
+
+                    <div class="left-button">
+                        <button *ngIf="!isLoading && titreCrud == fonctionPartagesService.titreCrud.ajouter" class="btn btn-primary float-left" (click)="ajoutBonTransfert()">
+                            Enregister
+                        </button>
+
+                        <button *ngIf="!isLoading && titreCrud == fonctionPartagesService.titreCrud.modifier" class="btn btn-primary float-left" (click)="modifierBonTransfert()">
+                            Enregister
+                        </button>
+
+                        <button *ngIf="isLoading" class="btn btn-primary" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Chargement...
+                        </button>
+                    </div>
+            </div>
+            <hr>
+            <div class="row">
+                <!-- Partie formulaire à Gauche en haut -->
+                        <div class="col-sm-6">
+                            <form action="javascript:">
+                                <div class="form-group row">
+                                    <label for="numero" class="col-sm-4 col-form-label">Numero</label>
+                                    <div class="col-sm-8 collapse-input">
+                                        <span class="form-control desactive-text-span" name="numero">{{bonTransfert.numero}}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="date" class="col-sm-4 col-form-label">Date</label>
+                                    <div class="col-sm-8">
+                                        <input *ngIf="titreCrud != fonctionPartagesService.titreCrud.details" type="date" class="form-control" id="date" name="date"
+                                            [(ngModel)]="bonTransfert.date">
+                                     
+                                        <span *ngIf="titreCrud == fonctionPartagesService.titreCrud.details" class="form-control desactive-text-span-relative" id="date" name="date">{{bonTransfert.date}}</span>
+                                        
+                                        <p *ngIf="erreurBonTransfert.date != ''" class="erreur">{{erreurBonTransfert.date}}</p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="tiers" class="col-sm-4 col-form-label">Magasin Depart</label>
+                                    <div class="col-sm-8">
+                                        <span class="form-control desactive-text-span-relative" name="numero">{{informationGenerale.societeCurrent}}</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="tiers" class="col-sm-4 col-form-label">Magasin Arrive</label>
+                                    <div class="col-sm-8">
+                                        <app-autocomplete *ngIf="titreCrud != fonctionPartagesService.titreCrud.details" [bordureRed]="erreurBonTransfert.magasinArrive != ''" (addElementEvent)="setMagasinArrive($event)" [keySelected]="keySelectedMagasin" [objet]="objetMagasin" [articles]="allMagasins" [idSelected]="bonTransfert.magasinArrive" [idHtml]="25"></app-autocomplete>
+                                        
+                                        <span *ngIf="titreCrud == fonctionPartagesService.titreCrud.details" class="form-control desactive-text-span-relative" id="date" name="date">{{fonctionPartagesService.getLibelleById(bonTransfert.magasinArrive, allMagasins, keySelectedMagasin)}}</span>
+                                  
+                                        <p *ngIf="erreurBonTransfert.magasinArrive != ''" class="erreur">{{erreurBonTransfert.magasinArrive}}
+                                        </p>
+                                   </div>
+                                </div>   
+                                
+                             </form>
+                        </div>
+                        <!-- Partie formulaire à Droite en haut --> 
+                        <div class="col-md-6">
+                            <form action="javascript:">
+                                
+
+                                <div class="form-group row">
+                                    <label for="totalHT" class="col-sm-4 col-form-label">Total HT</label>
+                                    <div class="col-sm-8">
+                                        
+                                        <span *ngIf="erreurBonTransfert.totalHT != ''" class="form-control desactive-text-span-relative border-erreur" style="position:relative;margin:0px !important; width: 100% !important;">{{fonctionPartagesService.getFormaThreeAfterVerguleNomber(bonTransfert.totalHT)}}</span>
+                                        <span *ngIf="erreurBonTransfert.totalHT == ''" class="form-control desactive-text-span-relative" style="position:relative;margin:0px !important; width: 100% !important;">{{fonctionPartagesService.getFormaThreeAfterVerguleNomber(bonTransfert.totalHT)}}</span>
+                                       
+                                        <p *ngIf="erreurBonTransfert.totalHT != ''" class="erreur">
+                                            {{erreurBonTransfert.totalHT}}</p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="totalRemise" class="col-sm-4 col-form-label">Total Remise</label>
+                                    <div class="col-sm-8">
+                                        
+                                        <span class="form-control desactive-text-span-relative">{{fonctionPartagesService.getFormaThreeAfterVerguleNomber(bonTransfert.totalRemise)}} </span>
+                                
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="totalTVA" class="col-sm-4 col-form-label">Total TVA</label>
+                                    <div class="col-sm-8">
+
+                                        <span class="form-control desactive-text-span-relative">{{fonctionPartagesService.getFormaThreeAfterVerguleNomber(bonTransfert.totalTVA)}} </span>
+                                
+                                    </div>
+                                </div>
+ 
+                                <div class="form-group row">
+                                    <label for="totalTTC" class="col-sm-4 col-form-label">Total TTC</label>
+                                    <div class="col-sm-8">
+                                        <span class="form-control desactive-text-span-relative">{{fonctionPartagesService.getFormaThreeAfterVerguleNomber(bonTransfert.totalTTC)}} </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="totalTTC" class="col-sm-12 col-form-label" style="font-weight: 900 !important; color:blue; font-size: 14px !important;">Montant Total : {{fonctionPartagesService.getFormaThreeAfterVerguleNomber(bonTransfert.montantTotal)}}</label>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- partie collapse -->
+                        <div class="col-md-12">
+                            <br>
+                            <button class="btn btn-primary" type="button" (click)="isCollapsed = !isCollapsed"
+                                [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">Plus de
+                                détails</button>
+                            
+                            <hr />
+                            
+                            <div id="collapseExample" [ngbCollapse]="isCollapsed">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <form action="javascript:">
+                                            <div class="form-group row">
+                                                <label for="tFiscale" class="col-sm-3 col-form-label">Timbre
+                                                    Fiscale</label>
+                                                <div class="col-sm-9 collapse-input">
+                                                    
+                                                    <span class="form-control desactive-text-span" name="timbreFiscale">{{fonctionPartagesService.getFormaThreeAfterVerguleNomber(bonTransfert.timbreFiscale)}} </span>
+                                  
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="totalRedevance"
+                                                    class="col-sm-3 col-form-label">Total Redevance</label>
+                                                <div class="col-sm-9 collapse-input">
+                                                        
+                                                   
+                                                    <span class="form-control desactive-text-span" name="totalRedevance">{{fonctionPartagesService.getFormaThreeAfterVerguleNomber(bonTransfert.totalRedevance)}} </span>
+                                  
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="totalFodec" class="col-sm-3 col-form-label">Total Fodec</label>
+                                                <div class="col-sm-9 collapse-input">
+                                                   
+                                                     
+                                                    <span class="form-control desactive-text-span" name="totalFodec">{{fonctionPartagesService.getFormaThreeAfterVerguleNomber(bonTransfert.totalFodec)}} </span>
+                                  
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <form action="javascript:">
+                                           
+                                            <div class="form-group row">
+                                                <label for="totalDC" class="col-sm-3 col-form-label">Total DC</label>
+                                                <div class="col-sm-9 collapse-input">
+                                                   
+                                                    <span class="form-control desactive-text-span"  name="totalDC202">{{fonctionPartagesService.getFormaThreeAfterVerguleNomber(bonTransfert.totalDC)}} </span>
+                                  
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="totalDC" class="col-sm-3 col-form-label">Total Gain</label>
+                                                <div class="col-sm-9 collapse-input">
+                                                   
+                                                    <span class="form-control desactive-text-span" name="totalDC202">{{fonctionPartagesService.getFormaThreeAfterVerguleNomber(bonTransfert.totalGain)}} </span>
+                                  
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="totalDC" class="col-sm-3 col-form-label">Escompte</label>
+                                                <div class="col-sm-9 collapse-input">
+                                                    
+                                                    <span class="form-control desactive-text-span" name="totalDC202">{{fonctionPartagesService.getFormaThreeAfterVerguleNomber(bonTransfert.montantEscompte)}} </span>
+                                  
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    
+                                        
+                                    <hr />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- partie tabs -->
+                        <div class="col-md-12">
+                            <ngb-tabset type="pills">
+                                <!-- partie Article -->
+                                <ngb-tab title="Articles" class="mb-3">
+                                    <ng-template ngbTabContent>
+                                        <div class="col-xl-14">
+                                            <hr>
+                                            <app-lignebl [isDetails]="isDetails" [articlesSelected]="articles"
+                                                [bonLivraison]="bonTransfert" [articles]="allArticles" [uniteMesures]="uniteMesures">
+                                            </app-lignebl>
+                                        </div>
+                                    </ng-template>
+                                </ngb-tab>
+                  
+                                <!--<ngb-tab title="Expeditions" class="mb-3">
+                                    <ng-template ngbTabContent>
+                                        <div class="col-xl-14" style="margin-top: 10px;">
+                                           <hr>
+                                            <app-expeditions [bonTransfert]="request" (ajouterExpeditionEvent)="modifierbonTransfert()"></app-expeditions>
+                                        </div>
+                                    </ng-template>
+                                </ngb-tab>-->
+
+                                <!-- partie Observations-->
+                                <ngb-tab title="Observations" class="mb-3">
+                                    <ng-template ngbTabContent>
+                                        <div class="form-group row">
+                                            <div class="col-sm-12">
+                                                  <hr>
+                                            </div>
+
+                                            <label for="observation"
+                                                class="col-sm-3 col-form-label">Observations</label>
+                                            <div class="col-sm-9" style="margin-top: 10px;">
+                                                <textarea *ngIf="titreCrud != fonctionPartagesService.titreCrud.details" class="form-control" id="observation" name="observation"
+                                                    [(ngModel)]="bonTransfert.observation"></textarea>
+                                            
+                                                
+                                                <span *ngIf="titreCrud == fonctionPartagesService.titreCrud.details" class="form-control" id="date" name="date">{{bonTransfert.observation}}</span>
+                                  
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </ngb-tab>
+                            </ngb-tabset>
+                        </div>
+                </div>
+        </app-card>
+    </div>
+</div>

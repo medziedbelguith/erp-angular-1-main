@@ -1,0 +1,51 @@
+<div id="myModalAjoutOperationPreventif" [class]="classCss">
+    <div style="position: absolute; width: 100%; height: 100%;top: 0px; left:0px;"
+        (click)="closeAjoutOperationPreventif()">
+    </div>
+    <!-- Modal content -->
+    <div class="modal-contentAjoutOperationPreventif">
+        <div style="display: flex; flex-direction: row; flex-wrap: nowrap;">
+            <span style="font-weight: 800; font-size: 18px; margin-left: 10px; ">Ajoutation OperationPreventif</span>
+            <span class="closeAjoutOperationPreventif" (click)="closeAjoutOperationPreventif()"
+                style="width: 30px; height: 30px; margin-left: auto; text-align: center;">
+                <i class="fas fa-times"></i></span>
+        </div>
+        <div class="container" style="position:relative; padding:0px;">
+            <app-spinner2 *ngIf="isLoading"></app-spinner2>
+            <div class="col-sm-12" style="padding:0px; margin-bottom: -30px;">
+                <app-operation-preventif isPopup=true
+                    (closeModalAjoutOperationPreventif)="closeAjoutOperationPreventif()">
+                </app-operation-preventif>
+            </div>
+        </div>
+    </div>
+
+    <!-- Model d'ajout -->
+    <!-- <div class="modal-contentAjoutOperationPreventif">
+        <ng-template #content let-modal>
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Ajouter OperationPreventif</h4>
+                <p type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </p>
+            </div>
+            <div class="modal-body">
+                <form action="javascript:">
+                    <div class="form-group row">
+                        <label for="libelle" class="col-sm-3 col-form-label">libelle</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="libelle" name="libelle"
+                                [(ngModel)]="operationPreventif.libelle">
+                            <p *ngIf="erreurOperationPreventif.libelle != ''" class="erreur">
+                                {{erreurOperationPreventif.libelle}}</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary"
+                    (click)="enregistrerOperationPreventif()">Enregistrer</button>
+            </div>
+        </ng-template>
+    </div> -->
+</div>

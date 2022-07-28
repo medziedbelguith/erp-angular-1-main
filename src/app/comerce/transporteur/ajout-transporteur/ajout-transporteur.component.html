@@ -1,0 +1,62 @@
+<app-card [hidHeader]="true">
+    <!-- Partie Header -->
+
+    <div class="row">
+        <!-- Partie formulaire à Gauche en haut -->
+        <div class="col-md-12 min-Width">
+            <form action="javascript:">
+                <div class="form-group row">
+                    <label for="nom" class="col-sm-4 col-form-label">Nom</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="nom" id="nom" placeholder="Enter nom"
+                            [(ngModel)]="transporteur.nom">
+                        <p *ngIf="erreurTransporteur.nom != ''" class="erreur">{{erreurTransporteur.nom}}</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="numVehicule" class="col-sm-4 col-form-label">Num Vehicule</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="numVehicule" id="numVehicule"
+                            placeholder="Enter Num Vehicule" [(ngModel)]="transporteur.numVehicule">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="gsm" class="col-sm-4 col-form-label">GSM</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="gsm" id="gsm" placeholder="Enter gsm"
+                            [(ngModel)]="transporteur.gsm">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="tel" class="col-sm-4 col-form-label">Téléphone</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="tel" id="tel" placeholder="Enter Téléphone"
+                            [(ngModel)]="transporteur.tel">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="email" class="col-sm-4 col-form-label">Email</label>
+                    <div class="col-sm-8">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Enter Email"
+                            [(ngModel)]="transporteur.email">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <hr *ngIf="isPopup" style="width: 100%; margin-top: 10px; margin-bottom: 5px;">
+
+    <div *ngIf="isPopup" style="padding: 10px; text-align: right; padding-top:0px; padding-bottom:0px; width: 100%;">
+
+        <button *ngIf="!isLoading" class="btn btn-primary" type="button" (click)="ajoutTransporteur()">
+            Enregister
+        </button>
+        <button *ngIf="isLoading" class="btn btn-primary" type="button" disabled>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Chargement...
+        </button>
+
+    </div>
+
+</app-card>

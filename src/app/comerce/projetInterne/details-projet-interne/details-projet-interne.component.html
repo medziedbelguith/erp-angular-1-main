@@ -1,0 +1,53 @@
+<app-card [hidHeader]="true">
+    <div class="card ng-tns-c92-22 ng-trigger ng-trigger-cardRemove borderless" style="opacity: 1;">
+        <div class="card-body ng-tns-c92-12 d-flex align-items-center justify-content-between ng-star-inserted">
+            <h5 class="mb-0 ng-tns-c92-12">Projet Interne details</h5>
+            <button _type="button" data-toggle="collapse" data-target=".pro-det-edit" aria-expanded="false"
+                aria-controls="pro-det-edit-1 pro-det-edit-2"
+                class="btn btn-primary btn-sm rounded m-0 float-right ng-tns-c92-12">
+                <i class="feather icon-edit"></i></button>
+        </div>
+        <div class="row border-top">
+            <!-- Partie formulaire à Gauche en haut -->
+            <div class="col">
+                <div class="form-group row">
+                    <label class="col-sm-6 col-form-label font-weight-bolder">Référence</label>
+                    <div class="col-sm-6 col-form-label"> {{projetInterne.reference}} </div>
+                </div>
+                
+                <div class="form-group row">
+                    <label class="col-sm-6 col-form-label font-weight-bolder">Libelle</label>
+                    <div class="col-sm-6 col-form-label"> {{projetInterne.libelle}} </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-6 col-form-label font-weight-bolder">Date Debut</label>
+                    <div class="col-sm-6 col-form-label"> {{projetInterne.dateDebut}} </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-6 col-form-label font-weight-bolder">Date Fin</label>
+                    <div class="col-sm-6 col-form-label"> {{projetInterne.dateFin}} </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-6 col-form-label font-weight-bolder">Probabilite Opportunite</label>
+                    <div class="col-sm-6"> {{projetInterne.probabiliteOpportunite}} </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-6 col-form-label font-weight-bolder">Montant Opportunite</label>
+                    <div class="col-sm-6"> {{projetInterne.mantantOpportunite}} </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-6 col-form-label font-weight-bolder">Budget</label>
+                    <div class="col-sm-6"> {{projetInterne.budget}} </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-6 col-form-label font-weight-bolder">taux Avancement</label>
+                    <div class="col-sm-6"> {{projetInterne.tauxAvancement}} </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-6 col-form-label font-weight-bolder">Description</label>
+                    <div class="col-sm-6 col-form-label"> {{projetInterne.description}} </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</app-card>

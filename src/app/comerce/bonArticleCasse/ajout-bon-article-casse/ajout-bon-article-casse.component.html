@@ -1,0 +1,112 @@
+<app-controle-acces [avoirAccee]="informationGenerale.verifierAccee('ajouterBonArticleCasse')"></app-controle-acces>
+
+
+<div *ngIf="informationGenerale.verifierAccee('ajouterBonArticleCasse')" class="row">
+    <div class="col-sm-12">
+        <app-card [hidHeader]="true">
+            <!-- Partie Header -->
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <div class="text-titre">
+                        <h3>Ajouter BonArticleCasse</h3>
+                    </div>
+                    <div class="left-button">
+                        <button *ngIf="!isLoading" class="btn btn-primary float-left" (click)="ajoutBonArticleCasse()">
+                            Enregister
+                        </button>
+                        <button *ngIf="isLoading" class="btn btn-primary" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Chargement...
+                        </button>
+                    </div>
+                </div>
+                 
+            </div>
+            <hr>
+            <div class="row">
+                <!-- Partie formulaire à Gauche en haut -->
+                <div class="col-sm-6">
+                    <form action="javascript:" style="margin-left: 50px;">
+                        <div class="form-group row">
+                            <label for="numero" class="col-sm-4 col-form-label">Numero</label>
+                            <div class="col-sm-8">
+                                <input type="input" class="form-control" name="numero" id="numero"
+                                    placeholder="Exemple: BA21-00001" [(ngModel)]="bonArticleCasse.numero">
+                                <p *ngIf="erreurBonArticleCasse.numero != ''" class="erreur">
+                                    {{erreurBonArticleCasse.numero}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="date" class="col-sm-4 col-form-label">Date</label>
+                            <div class="col-sm-8">
+                                <input type="date" class="form-control" id="date" name="date"
+                                    [(ngModel)]="bonArticleCasse.date">
+                                <p *ngIf="erreurBonArticleCasse.date != ''" class="erreur">
+                                    {{erreurBonArticleCasse.date}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="tiers" class="col-sm-4 col-form-label">Magasin</label>
+                            <div class="col-sm-8">
+                                <app-autocomplete (addElementEvent)="setMagasinID($event)"
+                                    [keySelected]="keySelectedMagasin" [objet]="objetMagasin" [articles]="allMagasins"
+                                    [idSelected]="bonArticleCasse.magasin" [idHtml]="20"></app-autocomplete>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="tiers" class="col-sm-4 col-form-label">Article</label>
+                            <div class="col-sm-8">
+                                <app-autocomplete (addElementEvent)="setArticleID($event)"
+                                    [keySelected]="keySelectedArticle" [objet]="objetArticle" [articles]="allArticles"
+                                    [idSelected]="bonArticleCasse.article" [idHtml]="25"></app-autocomplete>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <!-- Partie formulaire à Droite en haut -->
+                <div class="col-md-6">
+                    <form action="javascript:">
+                        <div class="form-group row">
+                            <label for="cas" class="col-sm-4 col-form-label">Cas</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="cas" id="cas" [(ngModel)]="bonArticleCasse.cas">
+                                    <option value="casse">Casse</option>
+                                    <option value="perte">Perte</option>
+                                    <option value="obsolescence">Obsolescence</option>
+                                </select>
+                                <p *ngIf="erreurBonArticleCasse.cas != ''" class="erreur">{{erreurBonArticleCasse.cas}}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="quantite" class="col-sm-4 col-form-label">Quantité</label>
+                            <div class="col-sm-8 collapse-input">
+                                <input type="number" class="form-control desactive-text-input" id="quantite"
+                                    name="quantite" [(ngModel)]="bonArticleCasse.quantite">
+                                <p *ngIf="erreurBonArticleCasse.quantite != ''" class="erreur">
+                                    {{erreurBonArticleCasse.quantite}}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="date" class="col-sm-4 col-form-label">Prix Unitaire</label>
+                            <div class="col-sm-8 collapse-input">
+                                <input type="number" class="form-control desactive-text-input" id="prixUnitaire"
+                                    name="prixUnitaire" [(ngModel)]="bonArticleCasse.prixUnitaire"
+                                    (focus)="showInput($event)">
+                                <span class="form-control desactive-text-span" (click)="showInput($event)"
+                                    name="prixUnitaire">{{fonctionPartagesService.getFormaThreeAfterVerguleNomber(bonArticleCasse.prixUnitaire)}}
+                                </span>
+                                <p *ngIf="erreurBonArticleCasse.prixUnitaire != ''" class="erreur">
+                                    {{erreurBonArticleCasse.prixUnitaire}}</p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </app-card>
+    </div>
+</div>

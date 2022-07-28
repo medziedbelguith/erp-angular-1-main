@@ -1,0 +1,96 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card [hidHeader]="true">
+            <div class="form-group row" style="justify-content: space-between !important;">
+                    <div class="text-titre">
+                        <h3>Ajouter Inventaire</h3>
+                    </div>
+                    <div class="left-button">
+                        <button *ngIf="!isLoading" class="btn btn-primary float-left" (click)="ajoutInventaire()">
+                            Enregister
+                        </button>
+                        <button *ngIf="isLoading" class="btn btn-primary" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Chargement...
+                        </button>
+                    </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-6">
+                    <form action="javascript:">
+                        <div class="form-group row">
+                            <label for="numero" class="col-sm-4 col-form-label">Numero</label>
+                            <div class="col-sm-8">
+                                <span class="form-control desactive-text-span collapse-input-table" placeholder="Exemple: BL21-00001"> {{inventaire.numero}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="date" class="col-sm-4 col-form-label">Date</label>
+                            <div class="col-sm-8">
+                                <input type="date" class="form-control" id="date" name="date"
+                                    [(ngModel)]="inventaire.date">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <form action="javascript:">
+                        <div class="form-group row">
+                            <label for="categorie" class="col-sm-4 col-form-label">Catégorie</label>
+                            <div class="col-sm-8">
+                                <app-autocomplete (addElementEvent)="setCategorieID($event)"
+                                    [keySelected]="keySelectedCategorie" [objet]="objetCategorie"
+                                    [bordureRed]="erreurInventaire.categorie != ''" [articles]="allCategories" [idSelected]="inventaire.categorie" [idHtml]="30" (openAddElementEvent)="openModalAjoutCategorie()">
+                                </app-autocomplete>
+                                <p *ngIf="erreurInventaire.categorie != ''" class="erreur">{{erreurInventaire.categorie}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="date" class="col-sm-4 col-form-label">Personnel</label>
+                            <div class="col-sm-8">
+                                <span class="form-control desactive-text-span collapse-input-table"> {{fonctionPartagesService.getLibelleByKey(inventaire.personne, allPersonnels, keySelectedPersonnel, 'id')}}</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row">
+                        <button class="btn btn-info" style="margin-left:auto;" (click)="getArticleByCategories()">
+                            Ajouter Articles
+                         </button>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <hr>
+                    <ngb-tabset type="pills">
+                        <ngb-tab title="Articles" class="mb-3">
+                            <ng-template ngbTabContent>
+                                <div class="col-xl-14" style="margin-top: 10px;">
+                                   <app-ligne-inventaire [articles]="articles" [allArticles]="allArticles" 
+                                   [isLoading]="isLoading"></app-ligne-inventaire> 
+                                </div>
+                            </ng-template>
+                        </ngb-tab>
+                        <ngb-tab title="Observations" class="mb-3">
+                            <ng-template ngbTabContent>
+                                <div class="form-group row">
+                                    <label for="observation" class="col-sm-3 col-form-label">Notes</label>
+                                    <div class="col-sm-9" style="margin-top: 10px;">
+                                        <textarea class="form-control" id="notes" name="notes"
+                                            [(ngModel)]="inventaire.notes"></textarea>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </ngb-tab>
+                    </ngb-tabset>
+                </div>
+            </div>
+        </app-card>
+    </div>
+</div>
+
+<app-add-element-modal [isLoading]="isLoading" [isOpenModalAjoutElement]="isOpenModalAjoutElement"
+[idAjoutElementModal]="idAjoutElementModal" (closeModalAjoutElement)="closeModalAjoutElement()" [typeElement]="typeElement"></app-add-element-modal>

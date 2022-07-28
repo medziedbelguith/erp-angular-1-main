@@ -1,0 +1,1358 @@
+
+    
+[
+    {
+        "id": "articles",
+        "titre":"articles",
+        "modules":[
+            {
+                "id":"listArticles",
+                "titre":"Liste Articles",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterArticle",
+                "titre":"Ajouter Article",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierArticle",
+                "titre":"Modifier Article",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerArticle",
+                "titre":"Supprimer Article",
+                "avoirAccee":"non"
+            }
+        ]
+    },
+
+    {
+        "id": "roles",
+        "titre":"roles",
+        "modules":[
+            {
+                "id":"listRoles",
+                "titre":"Liste Roles",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterRole",
+                "titre":"Ajouter Role",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierRole",
+                "titre":"Modifier Role",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerRole",
+                "titre":"Supprimer Role",
+                "avoirAccee":"non"
+            }
+        ]
+    },
+    {
+        "id": "bonAchat",
+        "titre":"BonAchats",
+        "modules":[
+            {
+                "id":"listBonAchats",
+                "titre":"Liste BonAchats",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterBonAchat",
+                "titre":"Ajouter BonAchat",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierBonAchat",
+                "titre":"Modifier BonAchat",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerBonAchat",
+                "titre":"Supprimer BonAchat",
+                "avoirAccee":"non"
+            }
+        ]
+    },
+    {
+        "id": "bonArticleCasse",
+        "titre":"BonArticleCasse",
+        "modules":[
+            {
+                "id":"listBonArticleCasse",
+                "titre":"Liste BonArticleCasse",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterBonArticleCasse",
+                "titre":"Ajouter BonArticleCasse",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierBonArticleCasse",
+                "titre":"Modifier BonArticleCasse",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerBonArticleCasse",
+                "titre":"Supprimer BonArticleCasse",
+                "avoirAccee":"non"
+            }
+        ]
+    },
+    {
+        "id": "BonCommande",
+        "titre":"BonCommandes",
+        "modules":[
+            {
+                "id":"listBonCommandes",
+                "titre":"Liste BonCommandes",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterBonCommande",
+                "titre":"Ajouter BonCommande",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierBonCommande",
+                "titre":"Modifier BonCommande",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerBonCommande",
+                "titre":"Supprimer BonCommande",
+                "avoirAccee":"non"
+            }
+        ]
+    },
+    {
+        "id": "BonLivraison",
+        "titre":"BonLivraisons",
+        "modules":[
+            {
+                "id":"listBonLivraisons",
+                "titre":"Liste BonLivraisons",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterBonLivraison",
+                "titre":"Ajouter BonLivraison",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierBonLivraison",
+                "titre":"Modifier BonLivraison",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerBonLivraison",
+                "titre":"Supprimer BonLivraison",
+                "avoirAccee":"non"
+            }
+        ]
+    }
+
+    ,
+    {
+        "id": "BonPrelevement",
+        "titre":"BonPrelevements",
+        "modules":[
+            {
+                "id":"listBonPrelevements",
+                "titre":"Liste BonPrelevements",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterBonPrelevement",
+                "titre":"Ajouter BonPrelevement",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierBonPrelevement",
+                "titre":"Modifier BonPrelevement",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerBonPrelevement",
+                "titre":"Supprimer BonPrelevement",
+                "avoirAccee":"non"
+            }
+        ]
+    }
+    ,
+    {
+        "id": "BonRetourClient",
+        "titre":"BonRetourClients",
+        "modules":[
+            {
+                "id":"listBonRetourClients",
+                "titre":"Liste BonRetourClients",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterBonRetourClient",
+                "titre":"Ajouter BonRetourClient",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierBonRetourClient",
+                "titre":"Modifier BonRetourClient",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerBonRetourClient",
+                "titre":"Supprimer BonRetourClient",
+                "avoirAccee":"non"
+            }
+        ]
+    }
+
+    ,
+    {
+        "id": "BonRetourFournisseur",
+        "titre":"BonRetourFournisseurs",
+        "modules":[
+            {
+                "id":"listBonRetourFournisseurs",
+                "titre":"Liste BonRetourFournisseurs",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterBonRetourFournisseur",
+                "titre":"Ajouter BonRetourFournisseur",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierBonRetourFournisseur",
+                "titre":"Modifier BonRetourFournisseur",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerBonRetourFournisseur",
+                "titre":"Supprimer BonRetourFournisseur",
+                "avoirAccee":"non"
+            }
+        ]
+    }
+    ,
+    {
+        "id": "BonTransfert",
+        "titre":"BonTransferts",
+        "modules":[
+            {
+                "id":"listBonTransferts",
+                "titre":"Liste BonTransferts",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterBonTransfert",
+                "titre":"Ajouter BonTransfert",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierBonTransfert",
+                "titre":"Modifier BonTransfert",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerBonTransfert",
+                "titre":"Supprimer BonTransfert",
+                "avoirAccee":"non"
+            }
+        ]
+    }
+
+    ,
+    {
+        "id": "BonTravail",
+        "titre":"BonTravails",
+        "modules":[
+            {
+                "id":"listBonTravails",
+                "titre":"Liste BonTravails",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterBonTravail",
+                "titre":"Ajouter BonTravail",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierBonTravail",
+                "titre":"Modifier BonTravail",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerBonTravail",
+                "titre":"Supprimer BonTravail",
+                "avoirAccee":"non"
+            }
+        ]
+    }
+    ,
+    {
+        "id": "Categorie",
+        "titre":"Categories",
+        "modules":[
+            {
+                "id":"listCategories",
+                "titre":"Liste Categories",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterCategorie",
+                "titre":"Ajouter Categorie",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierCategorie",
+                "titre":"Modifier Categorie",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerCategorie",
+                "titre":"Supprimer Categorie",
+                "avoirAccee":"non"
+            }
+        ]
+    }
+    ,
+    {
+        "id": "ChargeDirecte",
+        "titre":"ChargeDirectes",
+        "modules":[
+            {
+                "id":"listChargeDirectes",
+                "titre":"Liste ChargeDirectes",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterChargeDirecte",
+                "titre":"Ajouter ChargeDirecte",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierChargeDirecte",
+                "titre":"Modifier ChargeDirecte",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerChargeDirecte",
+                "titre":"Supprimer ChargeDirecte",
+                "avoirAccee":"non"
+            }
+        ]
+    } ,
+    {
+        "id": "Client",
+        "titre":"Clients",
+        "modules":[
+            {
+                "id":"listClients",
+                "titre":"Liste Clients",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterClient",
+                "titre":"Ajouter Client",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierClient",
+                "titre":"Modifier Client",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerClient",
+                "titre":"Supprimer Client",
+                "avoirAccee":"non"
+            }
+        ]
+    },
+    {
+        "id": "Client",
+        "titre":"Clients",
+        "modules":[
+            {
+                "id":"listClients",
+                "titre":"Liste Clients",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterClient",
+                "titre":"Ajouter Client",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierClient",
+                "titre":"Modifier Client",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerClient",
+                "titre":"Supprimer Client",
+                "avoirAccee":"non"
+            }
+        ]
+    }
+    ,
+    {
+        "id": "Commande",
+        "titre":"Commandes",
+        "modules":[
+            {
+                "id":"listCommandes",
+                "titre":"Liste Commandes",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterCommande",
+                "titre":"Ajouter Commande",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierCommande",
+                "titre":"Modifier Commande",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerCommande",
+                "titre":"Supprimer Commande",
+                "avoirAccee":"non"
+            }
+        ]
+    }
+    ,
+    {
+        "id": "ConditionReglement",
+        "titre":"ConditionReglements",
+        "modules":[
+            {
+                "id":"listConditionReglements",
+                "titre":"Liste ConditionReglements",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterConditionReglement",
+                "titre":"Ajouter ConditionReglement",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierConditionReglement",
+                "titre":"Modifier ConditionReglement",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerConditionReglement",
+                "titre":"Supprimer ConditionReglement",
+                "avoirAccee":"non"
+            }
+        ]
+    }
+    ,
+    {
+        "id": "Exercice",
+        "titre":"Exercices",
+        "modules":[
+            {
+                "id":"listExercices",
+                "titre":"Liste Exercices",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterExercice",
+                "titre":"Ajouter Exercice",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierExercice",
+                "titre":"Modifier Exercice",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerExercice",
+                "titre":"Supprimer Exercice",
+                "avoirAccee":"non"
+            }
+        ]
+    }
+    ,
+    {
+        "id": "Devis",
+        "titre":"Devis",
+        "modules":[
+            {
+                "id":"listDevis",
+                "titre":"Liste Devis",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterDevis",
+                "titre":"Ajouter Devis",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierDevis",
+                "titre":"Modifier Devis",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerDevis",
+                "titre":"Supprimer Devis",
+                "avoirAccee":"non"
+            }
+        ]
+    }
+    ,
+    {
+        "id": "CorrectionStock",
+        "titre":"CorrectionStocks",
+        "modules":[
+            {
+                "id":"listCorrectionStocks",
+                "titre":"Liste CorrectionStocks",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterCorrectionStock",
+                "titre":"Ajouter CorrectionStock",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierCorrectionStock",
+                "titre":"Modifier CorrectionStock",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerCorrectionStock",
+                "titre":"Supprimer CorrectionStock",
+                "avoirAccee":"non"
+            }
+        ]
+    }
+    ,
+    {
+        "id": "Famille",
+        "titre":"Familles",
+        "modules":[
+            {
+                "id":"listFamilles",
+                "titre":"Liste Familles",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterFamille",
+                "titre":"Ajouter Famille",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierFamille",
+                "titre":"Modifier Famille",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerFamille",
+                "titre":"Supprimer Famille",
+                "avoirAccee":"non"
+            }
+        ]
+    }
+    ,
+    {
+        "id": "Fournisseur",
+        "titre":"Fournisseurs",
+        "modules":[
+            {
+                "id":"listFournisseurs",
+                "titre":"Liste Fournisseurs",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterFournisseur",
+                "titre":"Ajouter Fournisseur",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierFournisseur",
+                "titre":"Modifier Fournisseur",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerFournisseur",
+                "titre":"Supprimer Fournisseur",
+                "avoirAccee":"non"
+            }
+        ]
+    }
+    ,
+    {
+        "id": "Inventaire",
+        "titre":"Inventaires",
+        "modules":[
+            {
+                "id":"listInventaires",
+                "titre":"Liste Inventaires",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterInventaire",
+                "titre":"Ajouter Inventaire",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierInventaire",
+                "titre":"Modifier Inventaire",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerInventaire",
+                "titre":"Supprimer Inventaire",
+                "avoirAccee":"non"
+            }
+        ]
+    } ,
+    {
+        "id": "Marque",
+        "titre":"Marques",
+        "modules":[
+            {
+                "id":"listMarques",
+                "titre":"Liste Marques",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterMarque",
+                "titre":"Ajouter Marque",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierMarque",
+                "titre":"Modifier Marque",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerMarque",
+                "titre":"Supprimer Marque",
+                "avoirAccee":"non"
+            }
+        ]
+    },
+    {
+        "id": "Modele",
+        "titre":"Modeles",
+        "modules":[
+            {
+                "id":"listModeles",
+                "titre":"Liste Modeles",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterModele",
+                "titre":"Ajouter Modele",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierModele",
+                "titre":"Modifier Modele",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerModele",
+                "titre":"Supprimer Modele",
+                "avoirAccee":"non"
+            }
+        ]
+    },
+    {
+        "id": "ModeLivraison",
+        "titre":"ModeLivraisons",
+        "modules":[
+            {
+                "id":"listModeLivraisons",
+                "titre":"Liste ModeLivraisons",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterModeLivraison",
+                "titre":"Ajouter ModeLivraison",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierModeLivraison",
+                "titre":"Modifier ModeLivraison",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerModeLivraison",
+                "titre":"Supprimer ModeLivraison",
+                "avoirAccee":"non"
+            }
+        ]
+    },
+    {
+        "id": "ModeReglement",
+        "titre":"ModeReglements",
+        "modules":[
+            {
+                "id":"listModeReglements",
+                "titre":"Liste ModeReglements",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterModeReglement",
+                "titre":"Ajouter ModeReglement",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierModeReglement",
+                "titre":"Modifier ModeReglement",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerModeReglement",
+                "titre":"Supprimer ModeReglement",
+                "avoirAccee":"non"
+            }
+        ]
+    },
+    {
+        "id": "OrdreEmission",
+        "titre":"OrdreEmissions",
+        "modules":[
+            {
+                "id":"listOrdreEmissions",
+                "titre":"Liste OrdreEmissions",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterOrdreEmission",
+                "titre":"Ajouter OrdreEmission",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierOrdreEmission",
+                "titre":"Modifier OrdreEmission",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerOrdreEmission",
+                "titre":"Supprimer OrdreEmission",
+                "avoirAccee":"non"
+            }
+        ]
+    },
+    {
+        "id": "Parametre",
+        "titre":"Parametres",
+        "modules":[
+            {
+                "id":"listParametres",
+                "titre":"Liste Parametres",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterParametre",
+                "titre":"Ajouter Parametre",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierParametre",
+                "titre":"Modifier Parametre",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerParametre",
+                "titre":"Supprimer Parametre",
+                "avoirAccee":"non"
+            }
+        ]
+    }
+    ,
+    {
+        "id": "Personnel",
+        "titre":"Personnels",
+        "modules":[
+            {
+                "id":"listPersonnels",
+                "titre":"Liste Personnels",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterPersonnel",
+                "titre":"Ajouter Personnel",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierPersonnel",
+                "titre":"Modifier Personnel",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerPersonnel",
+                "titre":"Supprimer Personnel",
+                "avoirAccee":"non"
+            }
+        ]
+    },
+    {
+        "id": "ProjetInterne",
+        "titre":"ProjetInternes",
+        "modules":[
+            {
+                "id":"listProjetInternes",
+                "titre":"Liste ProjetInternes",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterProjetInterne",
+                "titre":"Ajouter ProjetInterne",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierProjetInterne",
+                "titre":"Modifier ProjetInterne",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerProjetInterne",
+                "titre":"Supprimer ProjetInterne",
+                "avoirAccee":"non"
+            }
+        ]
+    }
+
+    ,
+    {
+        "id": "Projet",
+        "titre":"Projets",
+        "modules":[
+            {
+                "id":"listProjets",
+                "titre":"Liste Projets",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterProjet",
+                "titre":"Ajouter Projet",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierProjet",
+                "titre":"Modifier Projet",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerProjet",
+                "titre":"Supprimer Projet",
+                "avoirAccee":"non"
+            }
+        ]
+    },
+    {
+        "id": "Reception",
+        "titre":"Receptions",
+        "modules":[
+            {
+                "id":"listReceptions",
+                "titre":"Liste Receptions",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterReception",
+                "titre":"Ajouter Reception",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierReception",
+                "titre":"Modifier Reception",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerReception",
+                "titre":"Supprimer Reception",
+                "avoirAccee":"non"
+            }
+        ]
+    },
+    {
+        "id": "ReglementBonLivraison",
+        "titre":"Reglements BonLivraison",
+        "modules":[
+            {
+                "id":"listReglementBonLivraisons",
+                "titre":"Liste ReglementBonLivraisons",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterReglementBonLivraison",
+                "titre":"Ajouter ReglementBonLivraison",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierReglementBonLivraison",
+                "titre":"Modifier ReglementBonLivraison",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerReglementBonLivraison",
+                "titre":"Supprimer ReglementBonLivraison",
+                "avoirAccee":"non"
+            }
+        ]
+    }
+    ,
+    {
+        "id": "ReglementBonRetourClient",
+        "titre":"Reglements BonRetourClient",
+        "modules":[
+            {
+                "id":"listReglementBonRetourClients",
+                "titre":"Liste ReglementBonRetourClients",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterReglementBonRetourClient",
+                "titre":"Ajouter ReglementBonRetourClient",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierReglementBonRetourClient",
+                "titre":"Modifier ReglementBonRetourClient",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerReglementBonRetourClient",
+                "titre":"Supprimer ReglementBonRetourClient",
+                "avoirAccee":"non"
+            }
+        ]
+    }
+    ,
+    {
+        "id": "ReglementBonAchat",
+        "titre":"Reglements BonAchat",
+        "modules":[
+            {
+                "id":"listReglementBonAchats",
+                "titre":"Liste ReglementBonAchats",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterReglementBonAchat",
+                "titre":"Ajouter ReglementBonAchat",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierReglementBonAchat",
+                "titre":"Modifier ReglementBonAchat",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerReglementBonAchat",
+                "titre":"Supprimer ReglementBonAchat",
+                "avoirAccee":"non"
+            }
+        ]
+    }
+    ,
+    {
+        "id": "ReglementBonRetourFournisseur",
+        "titre":"Reglements BonRetourFournisseur",
+        "modules":[
+            {
+                "id":"listReglementBonRetourFournisseurs",
+                "titre":"Liste ReglementBonRetourFournisseurs",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterReglementBonRetourFournisseur",
+                "titre":"Ajouter ReglementBonRetourFournisseur",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierReglementBonRetourFournisseur",
+                "titre":"Modifier ReglementBonRetourFournisseur",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerReglementBonRetourFournisseur",
+                "titre":"Supprimer ReglementBonRetourFournisseur",
+                "avoirAccee":"non"
+            }
+        ]
+    }
+    ,
+    {
+        "id": "Secteur",
+        "titre":"Secteurs",
+        "modules":[
+            {
+                "id":"listSecteurs",
+                "titre":"Liste Secteurs",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterSecteur",
+                "titre":"Ajouter Secteur",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierSecteur",
+                "titre":"Modifier Secteur",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerSecteur",
+                "titre":"Supprimer Secteur",
+                "avoirAccee":"non"
+            }
+        ]
+    },
+    {
+        "id": "Societe",
+        "titre":"Societes",
+        "modules":[
+            {
+                "id":"listSocietes",
+                "titre":"Liste Societes",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterSociete",
+                "titre":"Ajouter Societe",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierSociete",
+                "titre":"Modifier Societe",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerSociete",
+                "titre":"Supprimer Societe",
+                "avoirAccee":"non"
+            }
+        ]
+    },
+    {
+        "id": "SousFamille",
+        "titre":"SousFamilles",
+        "modules":[
+            {
+                "id":"listSousFamilles",
+                "titre":"Liste SousFamilles",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterSousFamille",
+                "titre":"Ajouter SousFamille",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierSousFamille",
+                "titre":"Modifier SousFamille",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerSousFamille",
+                "titre":"Supprimer SousFamille",
+                "avoirAccee":"non"
+            }
+        ]
+    },
+    {
+        "id": "StatuOpportunite",
+        "titre":"StatuOpportunites",
+        "modules":[
+            {
+                "id":"listStatuOpportunites",
+                "titre":"Liste StatuOpportunites",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterStatuOpportunite",
+                "titre":"Ajouter StatuOpportunite",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierStatuOpportunite",
+                "titre":"Modifier StatuOpportunite",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerStatuOpportunite",
+                "titre":"Supprimer StatuOpportunite",
+                "avoirAccee":"non"
+            }
+        ]
+    },
+    {
+        "id": "TacheProjetInterne",
+        "titre":"TacheProjetInternes",
+        "modules":[
+            {
+                "id":"listTacheProjetInternes",
+                "titre":"Liste TacheProjetInternes",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterTacheProjetInterne",
+                "titre":"Ajouter TacheProjetInterne",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierTacheProjetInterne",
+                "titre":"Modifier TacheProjetInterne",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerTacheProjetInterne",
+                "titre":"Supprimer TacheProjetInterne",
+                "avoirAccee":"non"
+            }
+        ]
+    },
+    {
+        "id": "TauxTVA",
+        "titre":"TauxTVAs",
+        "modules":[
+            {
+                "id":"listTauxTVAs",
+                "titre":"Liste TauxTVAs",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterTauxTVA",
+                "titre":"Ajouter TauxTVA",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierTauxTVA",
+                "titre":"Modifier TauxTVA",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerTauxTVA",
+                "titre":"Supprimer TauxTVA",
+                "avoirAccee":"non"
+            }
+        ]
+    },
+    {
+        "id": "Transporteur",
+        "titre":"Transporteurs",
+        "modules":[
+            {
+                "id":"listTransporteurs",
+                "titre":"Liste Transporteurs",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterTransporteur",
+                "titre":"Ajouter Transporteur",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierTransporteur",
+                "titre":"Modifier Transporteur",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerTransporteur",
+                "titre":"Supprimer Transporteur",
+                "avoirAccee":"non"
+            }
+        ]
+    },
+    {
+        "id": "TypeCompte",
+        "titre":"TypeComptes",
+        "modules":[
+            {
+                "id":"listTypeComptes",
+                "titre":"Liste TypeComptes",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterTypeCompte",
+                "titre":"Ajouter TypeCompte",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierTypeCompte",
+                "titre":"Modifier TypeCompte",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerTypeCompte",
+                "titre":"Supprimer TypeCompte",
+                "avoirAccee":"non"
+            }
+        ]
+    },
+    {
+        "id": "TypeContact",
+        "titre":"TypeContacts",
+        "modules":[
+            {
+                "id":"listTypeContacts",
+                "titre":"Liste TypeContacts",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterTypeContact",
+                "titre":"Ajouter TypeContact",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierTypeContact",
+                "titre":"Modifier TypeContact",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerTypeContact",
+                "titre":"Supprimer TypeContact",
+                "avoirAccee":"non"
+            }
+        ]
+    },
+    {
+        "id": "TypeFournisseur",
+        "titre":"TypeFournisseurs",
+        "modules":[
+            {
+                "id":"listTypeFournisseurs",
+                "titre":"Liste TypeFournisseurs",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterTypeFournisseur",
+                "titre":"Ajouter TypeFournisseur",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierTypeFournisseur",
+                "titre":"Modifier TypeFournisseur",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerTypeFournisseur",
+                "titre":"Supprimer TypeFournisseur",
+                "avoirAccee":"non"
+            }
+        ]
+    },
+    {
+        "id": "TypeTier",
+        "titre":"TypeTiers",
+        "modules":[
+            {
+                "id":"listTypeTiers",
+                "titre":"Liste TypeTiers",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterTypeTier",
+                "titre":"Ajouter TypeTier",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierTypeTier",
+                "titre":"Modifier TypeTier",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerTypeTier",
+                "titre":"Supprimer TypeTier",
+                "avoirAccee":"non"
+            }
+        ]
+    },
+    {
+        "id": "UniteMesure",
+        "titre":"UniteMesures",
+        "modules":[
+            {
+                "id":"listUniteMesures",
+                "titre":"Liste UniteMesures",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterUniteMesure",
+                "titre":"Ajouter UniteMesure",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierUniteMesure",
+                "titre":"Modifier UniteMesure",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerUniteMesure",
+                "titre":"Supprimer UniteMesure",
+                "avoirAccee":"non"
+            }
+        ]
+    },
+    {
+        "id": "Utilisateur",
+        "titre":"Utilisateurs",
+        "modules":[
+            {
+                "id":"listUtilisateurs",
+                "titre":"Liste Utilisateurs",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterUtilisateur",
+                "titre":"Ajouter Utilisateur",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierUtilisateur",
+                "titre":"Modifier Utilisateur",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerUtilisateur",
+                "titre":"Supprimer Utilisateur",
+                "avoirAccee":"non"
+            }
+        ]
+    },
+    {
+        "id": "Variante",
+        "titre":"Variantes",
+        "modules":[
+            {
+                "id":"listVariantes",
+                "titre":"Liste Variantes",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"ajouterVariante",
+                "titre":"Ajouter Variante",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"modifierVariante",
+                "titre":"Modifier Variante",
+                "avoirAccee":"non"
+            },
+            {
+                "id":"supprimerVariante",
+                "titre":"Supprimer Variante",
+                "avoirAccee":"non"
+            }
+        ]
+    }
+]
+
+    

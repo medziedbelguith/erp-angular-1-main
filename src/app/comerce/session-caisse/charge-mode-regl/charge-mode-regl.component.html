@@ -1,0 +1,74 @@
+<form [formGroup]="formC">
+    <div class="category-page-wrapper">
+        <div class="result-inner">
+            <!--Showing 1 to 8 of 10 (2 Pages)-->
+        </div>
+        <div class="pagination-inner" >
+            <div class="th-tableau2" style="margin-top:5px;">
+                <select class="form-control form-control-sm"
+                    style="font-size: 12px; max-width: 58px; padding-left: 3px;" formControlName="limit"
+                    (change)="getReglements()">
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                    <option value=5>5</option>
+                    <option value=10>10</option>
+                </select>
+
+                <button (click)="getReglements()" class="btn btn-info ng-tns-c112-14"
+                    style="font-size: 15px; padding:2px; height: 30px; display: inline-block; white-space: nowrap; margin-left: 3px;">
+                    <i class="feather icon-search"></i>
+                </button>
+
+                <div style="margin-left:auto;">
+                    <app-showelements [items]="items" [itemsVariable]="itemsVariable"></app-showelements>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped" id="output">
+            <thead>
+                <tr>
+                    <th *ngFor="let key of objectKeys(itemsVariable)">
+                        <div class="th-tableau" (click)="changeCroissante(key)">
+                            {{key}}
+                            <div class="buttons-croissante">
+
+                                <i class="fas fa-caret-up croissante {{key}}-croissante"></i>
+                                <i class="fas fa-caret-down croissante {{key}}-croissante"></i>
+
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr *ngFor="let item of listReg">
+
+                    <td *ngFor="let key of objectKeys(itemsVariable)">
+                        <span *ngIf="allCreDebs.includes(key)" style="font-family: cursive,Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color:#1abc9c ;">{{item[key]}}</span>
+                        <span *ngIf="!allCreDebs.includes(key)">{{item[key]}}</span>
+                    </td>
+                </tr>
+
+            </tbody>
+            
+            <tbody *ngIf="initialisationEmptyTable()">
+                <tr *ngFor="let item of emptyTable">
+                  <td style="text-align: center;" colspan="50">
+                    <span style="color:transparent;">i</span>
+                  </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <app-spinner2 *ngIf="isLoading"></app-spinner2>
+    <hr>
+    <app-pagination [page]="request.page" [totalPage]="totalPage" (setPageEvent)="setPage($event)">
+    </app-pagination>
+
+</form>

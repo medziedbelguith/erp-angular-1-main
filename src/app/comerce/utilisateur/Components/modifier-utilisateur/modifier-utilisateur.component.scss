@@ -1,0 +1,23 @@
+.class-utilisateur{
+    text-align: center;
+    margin:auto; 
+    padding:5px;
+    text-decoration: underline;
+    font-size: 15px;
+    font-weight: 700;
+    cursor:pointer;
+}
+
+.class-utilisateur:hover{
+    background-color: #159a80;
+    color:white;
+}
+
+.class-utilisateur-activer{
+    background-color: #1acda9;
+    color:white;
+}
+
+.desactive-block{
+    display: none;
+}

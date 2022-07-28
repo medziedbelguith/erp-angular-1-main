@@ -1,0 +1,49 @@
+<div class="col-xl-14">
+    <app-card cardTitle="Liste mouvement Stock" blockClass="table-border-style">
+        <form [formGroup]="formC">
+            <div class="pagination-inner">
+
+                <app-filtre-date-button (getDatee)="getMouvementStock($event)"></app-filtre-date-button>
+
+                <label for="magasin" class="col-sm-1 col-form-label" style="font-size: 10px;">Magasin</label>
+                <div class="col-sm-4">
+                    <app-autocomplete (addElementEvent)="setMagasinID($event)" [keySelected]="keySelectedMagasin"
+                        [objet]="objetMagasin" [articles]="allMagasins" [idSelected]="mouvementStock.magasin" [idHtml]="20">
+                    </app-autocomplete>
+                </div>
+
+            </div>
+
+            <div class="table-responsive" style="margin-top: 5px;"> 
+                <table class="table table-striped" id="output">
+                    <thead>
+                        <tr>
+                            <th *ngFor="let key of objectKeys(itemsVariable)">
+                                <div class="th-tableau" (click)="changeCroissante(key)">
+                                    {{key}}
+                                    <div class="buttons-croissante">
+                                        <i class="fas fa-caret-up croissante {{key}}-croissante"></i>
+                                        <i class="fas fa-caret-down croissante {{key}}-croissante"></i>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of mouvementStock">
+                            <td *ngFor="let key of objectKeys(itemsVariable)">
+                                <span *ngIf="key != 'magasin' ">{{item[key]}}</span>
+                                <span *ngIf="key == 'magasin' ">{{item[key].raisonSociale}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <app-spinner2 *ngIf="isLoading"></app-spinner2>
+            <hr>
+            <app-pagination [page]="request.page" [totalPage]="totalPage" (setPageEvent)="setPage($event)">
+            </app-pagination>
+        </form>
+    </app-card>
+</div>

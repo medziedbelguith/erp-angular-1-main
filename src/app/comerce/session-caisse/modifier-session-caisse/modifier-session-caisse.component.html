@@ -1,0 +1,128 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card [hidHeader]="true">
+            <!-- Partie Header -->
+            <div class="form-group row" style="justify-content: space-between !important;">
+                <div class="text-titre">
+                    <h3>Modifier un sessionCaisse</h3>
+                </div>
+                <div class="left-button">
+                    <button *ngIf="!isLoading" class="btn btn-primary" type="button" (click)="ModifierSessionCaisse()">
+                        Modifier
+                    </button>
+                    <button *ngIf="isLoading" class="btn btn-primary" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Chargement...
+                    </button>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <!-- Partie formulaire à Gauche en haut -->
+                <div class="col-md-6">
+                    <form action="javascript:">
+                        <div class="form-group row">
+                            <label for="libelle" class="col-sm-3 col-form-label">Caisse</label>
+                            <div class="col-sm-9">
+                                <app-autocomplete (addElementEvent)="setCaisseID($event)"
+                                    [keySelected]="keySelectedCaisse" [bordureRed]="erreurSessionCaisse.caisse != ''"
+                                    [objet]="objetCaisse" [articles]="allCaisses" [idSelected]="sessionCaisse.caisse" [idHtml]="5"
+                                    (openAddElementEvent)="openModalAjoutCaisse()"></app-autocomplete>
+
+                                <p *ngIf="erreurSessionCaisse.caisse != ''" class="erreur">{{erreurSessionCaisse.caisse}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="client" class="col-sm-3 col-form-label">Utilisateur</label>
+                            <div class="col-sm-9">
+                                <app-autocomplete (addElementEvent)="setUtilisateurID($event)"
+                                    [keySelected]="keySelectedUtilisateur" [bordureRed]="erreurSessionCaisse.utilisateur != ''"
+                                    [objet]="objetUtilisateur" [articles]="allUtilisateurs" [idSelected]="sessionCaisse.utilisateur" [idHtml]="15"
+                                    (openAddElementEvent)="openModalAjoutUtilisateur()"></app-autocomplete>
+                                <p *ngIf="erreurSessionCaisse.utilisateur != ''" class="erreur">{{erreurSessionCaisse.utilisateur}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="numero" class="col-sm-3 col-form-label">Numero</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="numero" id="numero"
+                                    [(ngModel)]="sessionCaisse.numero">
+                                <p *ngIf="erreurSessionCaisse.numero != ''" class="erreur">{{erreurSessionCaisse.numero}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="dateOuverture" class="col-sm-3 col-form-label">Date Ouverture</label>
+                            <div class="col-sm-9">
+                                <input type="date" class="form-control" id="dateOuverture" name="dateOuverture" [(ngModel)]="sessionCaisse.dateOuverture">
+                        
+                                <p *ngIf="erreurSessionCaisse.dateOuverture != ''" class="erreur">{{erreurSessionCaisse.dateOuverture}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="cloture" class="col-sm-3 col-form-label">Cloture</label>
+                            <div class="col-sm-9">
+                                <select [(ngModel)]="sessionCaisse.cloture" id="cloture" name="cloture" style="width: 100%;">
+                                    <option value=true>Vrai</option>
+                                    <option value=false>Faux</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="dateCloture" class="col-sm-3 col-form-label">Date Cloture</label>
+                            <div class="col-sm-9">
+                                <input type="date" class="form-control" id="dateCloture" name="dateCloture" [(ngModel)]="sessionCaisse.dateCloture">
+        
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Partie formulaire à Droite en haut -->
+                <div class="col-md-6">
+                    <form action="javascript:">
+                        <div class="form-group row">
+                            <label for="fondCaisseOuvrier" class="col-sm-3 col-form-label">Fond Caisse Ouvrier</label>
+                            <div class="col-sm-9">
+                                <app-input-number-vergule [messageErreur]="erreurSessionCaisse.fondCaisseOuvrier" [field]="sessionCaisse" key="fondCaisseOuvrier" idUnique="fondCaisseOuvrier2">
+                                </app-input-number-vergule>
+                                <p *ngIf="erreurSessionCaisse.fondCaisseOuvrier != ''" class="erreur">{{erreurSessionCaisse.fondCaisseOuvrier}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="fondCaisseAdmin" class="col-sm-3 col-form-label">Fond Caisse Admin</label>
+                            <div class="col-sm-9">
+                                <app-input-number-vergule [messageErreur]="erreurSessionCaisse.fondCaisseAdmin" [field]="sessionCaisse" key="fondCaisseAdmin" idUnique="fondCaisseAdmin">
+                                </app-input-number-vergule>
+                                <p *ngIf="erreurSessionCaisse.fondCaisseAdmin != ''" class="erreur">{{erreurSessionCaisse.fondCaisseAdmin}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="totalCaisse" class="col-sm-3 col-form-label">Total Caisse</label>
+                            <div class="col-sm-9">
+                                <app-input-number-vergule [field]="sessionCaisse" key="totalCaisse" idUnique="totalCaisse">
+                                </app-input-number-vergule>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="montantDifference" class="col-sm-3 col-form-label">Montant Difference</label>
+                            <div class="col-sm-9">
+                                <app-input-number-vergule [field]="sessionCaisse" key="montantDifference" idUnique="fondCaisseAdmin">
+                                </app-input-number-vergule>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="remarque" class="col-sm-3 col-form-label">Remarque</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="remarque" name="remarque"
+                                [(ngModel)]="sessionCaisse.remarque"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </app-card>
+    </div>
+</div>
+
+<app-add-element-modal [isLoading]="isLoading" [isOpenModalAjoutElement]="isOpenModalAjoutElement"
+    [idAjoutElementModal]="idAjoutElementModal" (closeModalAjoutElement)="closeModalAjoutElement()"
+    [typeElement]="typeElement"></app-add-element-modal>

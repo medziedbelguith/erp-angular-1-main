@@ -1,0 +1,57 @@
+<app-controle-acces [avoirAccee]="informationGenerale.verifierAccee('modifierArticle')"></app-controle-acces>
+
+<div class="row" *ngIf="informationGenerale.verifierAccee('modifierArticle')">
+    <div class="col-sm-12">
+        <app-card [hidHeader]="true">
+            <!-- Partie Header -->
+            <div class="form-group row" style="justify-content: space-between !important;">
+                <div class="text-titre">
+                    <h3>Modifier l'article</h3>
+                </div>
+                <div class="left-button" style="float:right;">
+                    <button *ngIf="!isLoading" class="btn btn-primary" type="button" (click)="modifierArticle()">
+                        Enregister
+                    </button>
+                    <button *ngIf="isLoading" class="btn btn-primary" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Chargement...
+                    </button>
+                </div>
+            </div>
+            <hr>
+            
+            <app-article-html
+            (getAllParametres)="getAllParametres()"
+            (getCodeBarre)="getCodeBarre()"
+            (changePrixVHT)="changePrixVHT()"
+
+            [isLoading]="isLoading"
+            [article]="article"
+            [erreurArticle]="erreurArticle"
+            [uniteMesures]="uniteMesures"
+            [categories]="categories"
+            [familles]="familles"
+            [famillesCurrent]="famillesCurrent"
+            [sousFamilles]="sousFamilles"
+            [sousFamillesCurrent]="sousFamillesCurrent"
+            [categorieFamilles]="categorieFamilles"
+            [familleSousFamilles]="familleSousFamilles"
+            [marques]="marques"
+            [modeles]="modeles"
+            [modelesCurrent]="modelesCurrent"
+            [tauxTVAs]="tauxTVAs"
+            [tauxTVAsCurrent]="tauxTVAsCurrent"
+            [frais]="frais"
+            [listFrais]="listFrais"
+            [fournisseurs]="fournisseurs"
+            [prixWithQuantites]="prixWithQuantites"
+            [typeTiers] = "typeTiers"
+            [variantes] = "variantes"
+            [sousProduits] = "sousProduits"
+            [titreCrud] = "fonctionPartagesService.titreCrud.modifier"
+            [idArticle]="id"
+          ></app-article-html>
+
+        </app-card>
+    </div>
+</div>

@@ -1,0 +1,85 @@
+<app-card [hidHeader]="true">
+    <div class="card ng-tns-c92-22 ng-trigger ng-trigger-cardRemove borderless" style="opacity: 1;">
+        <div class="card-body ng-tns-c92-12 d-flex align-items-center justify-content-between ng-star-inserted">
+            <h5 class="mb-0 ng-tns-c92-12">Inventaire details</h5>
+            <button class="btn btn-primary" type="button" (click)="goToList()"> Retour </button>
+        </div>
+        <div class="row border-top">
+            <!-- Partie formulaire à Gauche en haut -->
+            <div class="col">
+                <div class="form-group row">
+                    <label class="col-sm-6 col-form-label font-weight-bolder">Numéro</label>
+                    <label class="col-sm-6 col-form-label font-weight-bolder"> {{inventaire.numero}}</label>
+                    <app-spinner3 [isLoading]="isLoading"></app-spinner3>
+                </div>
+
+                <hr>
+                
+                <div class="form-group row">
+                    <label class="col-sm-6 col-form-label font-weight-bolder">Date</label>
+                    <label class="col-sm-6 col-form-label font-weight-bolder" *ngIf="inventaire.date != ''">{{getDate(inventaire.date)}}</label>
+                    <app-spinner3 [isLoading]="isLoading"></app-spinner3>
+              
+                </div>
+                <hr>
+                <div class="form-group row">
+                    <label class="col-sm-6 col-form-label font-weight-bolder">Personnel</label>
+                    <label *ngIf="inventaire.personne" class="col-sm-6 col-form-label font-weight-bolder">
+                        Nom:<span> {{inventaire.personne.nom}} </span> <br>
+                        Prénom:<span> {{inventaire.personne.prenom}} </span><br>
+                        Email:<span> {{inventaire.personne.email}} </span><br>
+                        Téléphone:<span> {{inventaire.personne.telephone}} </span><br>
+                        Adresse:<span> {{inventaire.personne.adresse}} </span><br>
+                    </label>
+                    <app-spinner3 [isLoading]="isLoading"></app-spinner3>
+            
+                </div>
+                <hr>
+                <div class="form-group row">
+                    <label class="col-sm-6 col-form-label font-weight-bolder">Categorie</label>
+                    <label class="col-sm-6 col-form-label font-weight-bolder" *ngIf="inventaire.categorie">{{inventaire.categorie.libelle}}</label>
+                    <app-spinner3 [isLoading]="isLoading"></app-spinner3>
+            
+                </div>
+                <hr>
+                <div class="form-group row">
+                    <label class="col-sm-6 col-form-label font-weight-bolder">Notes</label>
+                    <label class="col-sm-6 col-form-label font-weight-bolder">{{inventaire.notes}}</label>
+                    <app-spinner3 [isLoading]="isLoading"></app-spinner3>
+            
+                </div>
+                <hr>
+            </div>
+            <!-- Partie formulaire à Droite en haut -->
+            <div class="table-responsive">
+                <table class="table table-striped" id="output" style="width: 100%; overflow-x: auto;">
+                    <thead>
+                        <tr>
+                            <th *ngFor="let key of objectKeys(shemaArticle)">
+                                <div class="th-tableau" >
+                                    {{shemaArticle[key]}}
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="inventaire.ligneInventaire.length > 0">
+                        <tr *ngFor="let item of inventaire.ligneInventaire" >
+                            <td *ngFor="let key of objectKeys(shemaArticle)" [style]="getStyle(item)">
+                                <span *ngIf="!tabQuantite.includes(key)"> {{item[key]}} </span>
+                                <span *ngIf="tabQuantite.includes(key)" style="float:right; text-align: right;"> {{fonctionPartages.getFormaThreeAfterVerguleQuantite(item[key])}} </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody *ngIf="inventaire.ligneInventaire.length == 0">
+                        <tr>
+                            <td style="text-align: center;" colspan="9">
+                                Vide
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</app-card>

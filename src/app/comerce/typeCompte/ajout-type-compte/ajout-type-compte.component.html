@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-sm-12 min-Width">
+        <app-card [hidHeader]="true">
+            <!-- Partie Header -->
+           
+            <div class="row">
+                <!-- Partie formulaire à Gauche en haut -->
+                <div class="col-md-12">
+                    <form action="javascript:">
+                        <div class="form-group row">
+                            <label for="libelle" class="col-sm-3 col-form-label">Libellé</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="{{titre}}libelle" name="{{titre}}libelle"
+                                [(ngModel)]="typeCompte.libelle">
+                                <p *ngIf="erreurTypeCompte.libelle != ''" class="erreur">{{erreurTypeCompte.libelle}}</p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <hr style="width: 100%; margin-top: 10px; margin-bottom: 5px;">
+  
+                <div style="padding: 10px; text-align: right; padding-top:0px; padding-bottom:0px; width: 100%;">
+                  
+                    <button *ngIf="!isLoading" class="btn btn-primary" (click)="ajoutTypeCompte()"
+                        style="height: 38px; margin-right: 15px; font-size: 11px;">
+                        Ajouter
+                    </button>
+                    <button *ngIf="isLoading" class="btn btn-primary" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Chargement...
+                    </button>
+              
+                </div>
+            </div>
+        </app-card>
+    </div>
+</div>

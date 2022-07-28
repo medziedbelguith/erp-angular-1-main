@@ -1,0 +1,103 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card [hidHeader]="true">
+          
+            <div *ngIf="!isPopup" class="form-group row" style="justify-content: space-between !important; margin:0px;">
+                <div class="text-titre">
+                    <h3>{{titreCrud}} Role</h3>
+                </div>
+                <div class="left-button" style="float:right;">
+                    <button *ngIf="!isLoading && isDetails == 'non'" class="btn btn-primary" type="button" (click)="clickEnregistrer()">
+                        Enregister
+                    </button>
+                    <button *ngIf="isLoading" class="btn btn-primary" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Chargement...
+                    </button>
+                </div>
+            </div>
+            
+            <hr *ngIf="!isPopup">
+            
+            <div class="row">
+                <!-- Partie formulaire à Gauche en haut -->
+                <div class="col-md-12">
+                    <form action="javascript:">
+                        <div class="form-group row">
+                            <label for="libelle" class="col-sm-3 col-form-label">Libelle</label>
+                           
+                            <label *ngIf="isDetails == 'oui'" for="libelle" class="col-sm-3 col-form-label">{{role.libelle}}</label>
+                           
+                            <div class="col-sm-9" *ngIf="isDetails == 'non'">
+                                <input type="input" class="form-control" name="libelle" id="libelle"
+                                    placeholder="Enter Role" [(ngModel)]="role.libelle">
+                                <p *ngIf="erreurRole.libelle != ''" class="erreur">{{erreurRole.libelle}}</p>
+                            </div>
+
+                            <div class="col-12">
+                                <hr>
+                            </div>
+                            
+                            <div class="col-6">
+                                 <button class="btn btn-primary" (click)="cocheTout('oui')">Tout coche</button>
+                            </div>
+
+                            <div class="col-6">
+                                <button class="btn btn-primary" style="float:right;" (click)="cocheTout('non')">tout decoche</button>
+                           </div>
+  
+                        </div>
+
+                        <div *ngFor="let module of modules">
+                           
+                            <div class="table-responsive">
+                                <table class="table table-striped" id="output">
+                                    <thead>
+                                        <tr >
+                                            <th colspan="50" style="background-color: rgba(165, 42, 42, 0.397);">
+                                                   {{module.titre}}
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let itemModule of module.modules">
+                                            <td style="width:30px;">
+                                                <div style="text-align:center;">
+                                                    <input *ngIf="isDetails == 'non'" style="width: 15px; height: 15px;" type="checkbox" [id]="itemModule.id" [checked]="verifierAccee(itemModule.id, itemModule.titre)" (click)="clickAccee(itemModule.id, itemModule.titre)">
+                                                    <span *ngIf="isDetails == 'oui'" style="text-align: center; display: block;"> <i class="fas fa-check-square" style="font-size: 15px;" *ngIf="verifierAccee(itemModule.id, itemModule.titre)"></i> <i class="fas fa-square" style="font-size: 15px;" *ngIf="!verifierAccee(itemModule.id, itemModule.titre)"></i> </span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="th-tableau">
+                                                   {{itemModule.titre}}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                
+                            </div>
+                
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+            <hr *ngIf="isPopup" style="width: 100%; margin-top: 10px; margin-bottom: 5px;">
+  
+            <div *ngIf="isPopup" style="padding: 10px; text-align: right; padding-top:0px; padding-bottom:0px; width: 100%;">
+              
+                <button *ngIf="!isLoading" class="btn btn-primary" type="button" (click)="ajoutRole()">
+                    Enregister
+                </button>
+                <button *ngIf="isLoading" class="btn btn-primary" type="button" disabled>
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Chargement...
+                </button>
+              
+            </div>
+
+        </app-card>
+    </div>
+</div>

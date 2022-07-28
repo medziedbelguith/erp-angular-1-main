@@ -1,0 +1,160 @@
+
+    <div class="col-sm-12" style="padding: 10px;" *ngIf="fonctionPartagesService.titreCrud.details != titreCrud">
+        <form action="javascript:">
+            <div class="form-group row">
+                <label for="articles" class="col-sm-2 col-form-label">Article</label>
+                <div class="col-sm-10">
+                    <app-autocomplete modeMultiSortie=true [shemaMultiSortie]="shemaMultiSortie"
+                        (addElementEvent)="setArticleID($event)" [keySelected]="keySelectedArticle"
+                        [objet]="shemaArticle2" [articles]="articles" [idSelected]="itemArticleSelected.article"
+                        idHtml="1" [bordureRed]="erreurArticle.article != ''"> </app-autocomplete>
+
+                    <p *ngIf="erreurArticle.article != ''" class="erreur">{{erreurArticle.article}}</p>
+
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-4">
+                    <div class="form-group row">
+
+                        <label for="qteTeorique" class=" col-form-label col-sm-4">Quantité En Stock</label>
+
+                        <div class="col-sm-8 collapse-input">
+                            <span class="form-control desactive-text-span"
+                                name="prixVenteHT222">{{fonctionPartagesService.getFormaThreeAfterVerguleQuantite(itemArticleSelected.qteAncienne)}}
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="form-group row">
+                        <label for="qteDifference" class="col-form-label col-sm-4">Quantité Difference</label>
+                        <div class="col-sm-8 collapse-input">
+                            <app-input-number-vergule isQuantite="1" [messageErreur]="erreurArticle.qteDifference != ''"
+                                [field]="itemArticleSelected" key="qteDifference" idUnique="qteDifference222"
+                                (ngModelChange)="changeQuantiteDifference()"></app-input-number-vergule>
+                                <p *ngIf="erreurArticle.qteDifference != ''" class="erreur">{{erreurArticle.qteDifference}}</p>
+               
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="form-group row">
+                        <label for="qteNouvelle" class="col-form-label col-sm-4">Nouvelle Quantité
+                            </label>
+                        <div class="col-sm-8 collapse-input">
+                            <app-input-number-vergule isQuantite="1" [field]="itemArticleSelected" key="qteNouvelle"
+                                idUnique="qteNuvelle222" (ngModelChange)="changeQuantiteNouvelle()">
+                            </app-input-number-vergule>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="notes" class="col-form-label col-sm-2">Notes</label>
+                <div class="col-sm-10 collapse-input">
+                    <input type="text" class="form-control desactive-text-input" name="notes" id="notes"
+                        [(ngModel)]="itemArticleSelected.notes">
+                </div>
+            </div>
+
+            <div class="form-group row" style="margin-bottom: 0px;">
+                <div class="col-sm-12" style="text-align: center; margin-top: 10px;">
+                    <button type="button" (click)="ajoutArticle()" class="btn btn-success ng-tns-c112-14"
+                        style="font-size: 12px; padding:5px; height: 30px; display: inline-block; white-space: nowrap; margin-left: 3px;">
+                        Ajouter Article <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-sm-12">
+        <form action="javascript:">
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <p> 
+                        <span style="font-size:17px; font-weight: 900;">Liste des articles </span>
+                        <span style="float:right;">
+                            <app-showelements [items]="itemsShowsElements" [itemsVariable]="itemsVariableShowsElements"></app-showelements>
+                        </span>
+                    </p>
+
+                    <div class="table-responsive">
+
+                        <table class="table table-striped" id="output">
+                            <thead>
+                                <tr>
+                                    <th *ngFor="let key of objectKeys(itemsVariableShowsElements)">
+                                        <div class="th-tableau">
+                                            {{shemaArticle[key]}}
+                                        </div>
+                                    </th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="articlesSelected.length > 0">
+                                <tr *ngFor="let item of articlesSelected">
+                                    <td *ngFor="let key of objectKeys(itemsVariableShowsElements)">
+                                        <span *ngIf="!fonctionPartagesService.colonnesQuantites.includes(key) && !fonctionPartagesService.colonnesPrix.includes(key)">{{item[key]}}</span>
+                                        <div *ngIf="key == 'qteDifference' && fonctionPartagesService.titreCrud.details != titreCrud" class="col-sm-12 collapse-input">
+                                            <app-input-number-vergule isQuantite="1" [field]="item" [key]="key"
+                                                [idUnique]="key+item['numero']"
+                                                (ngModelChange)="changeQuantiteDifferenceTab(item['article'])">
+                                            </app-input-number-vergule>
+                                        </div>
+
+                                        <div *ngIf="key == 'qteNouvelle' && fonctionPartagesService.titreCrud.details != titreCrud" class="col-sm-12 collapse-input">
+                                            <app-input-number-vergule isQuantite="1" [field]="item" [key]="key"
+                                                [idUnique]="key+item['numero']"
+                                                (ngModelChange)="changeQuantiteNouvelleTab(item['article'])">
+                                            </app-input-number-vergule>
+                                        </div>
+                                        <span
+                                            *ngIf="fonctionPartagesService.colonnesQuantites.includes(key) && ((key != 'qteNouvelle' && key != 'qteDifference') || fonctionPartagesService.titreCrud.details == titreCrud)"
+                                            style="float:right;">{{fonctionPartagesService.getFormaThreeAfterVerguleQuantite(item[key])}}</span>
+                                        <span
+                                            *ngIf="fonctionPartagesService.colonnesPrix.includes(key) && ((key != 'qteNouvelle' && key != 'qteDifference') || fonctionPartagesService.titreCrud.details == titreCrud)"
+                                            style="float:right;">{{fonctionPartagesService.getFormaThreeAfterVerguleNomber(item[key])}}</span>
+
+                                    </td>
+                                    <td>
+                                        <a *ngIf="item.numero != 1" href="javascript:"
+                                            class="btn btn-icon btn-outline-info"
+                                            style="width:30px; height: 30px; margin-right: 5px;"
+                                            (click)="deplaceLigne(item.numero - 1, -1)">
+                                            <i _ngcontent-myx-c121="" class="fa fa-arrow-up"></i>
+                                        </a>
+                                        <a *ngIf="item.numero != articlesSelected.length" href="javascript:"
+                                            class="btn btn-icon btn-outline-info"
+                                            style="width:30px; height: 30px; margin-right: 5px;"
+                                            (click)="deplaceLigne(item.numero - 1, 1)">
+                                            <i _ngcontent-myx-c121="" class="fa fa-arrow-down"></i>
+                                        </a>
+                                        <a href="javascript:" class="btn btn-icon btn-outline-danger"
+                                            style="width:30px; height: 30px;"
+                                            (click)="openModalDelete(item.numero, item.reference)">
+                                            <i _ngcontent-myx-c121="" class="feather icon-trash-2"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody *ngIf="initialisationEmptyTable()">
+                                <tr *ngFor="let item of emptyTable">
+                                  <td style="text-align: center;" colspan="50">
+                                    <span style="color:transparent;">i</span>
+                                  </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <app-delete-modal [isLoading]="isLoading" [isOpenModalDelete]="isOpenModalDelete" [idDeleteModal]="numeroItemDelete"
+        [params1Delete]="params1Delete" [params2Delete]="params2Delete" (deleteItem)="deleteItem()"
+        (closeModalDelete)="closeModalDelete()"></app-delete-modal>

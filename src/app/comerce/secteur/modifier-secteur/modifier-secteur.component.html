@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-sm-12 min-Width">
+        <app-card [hidHeader]="true">
+            <!-- Partie Header -->
+            
+            <div class="row">
+                <!-- Partie formulaire à Gauche en haut -->
+                <div class="col-md-12">
+                    <form action="javascript:">
+                        <div class="form-group row">
+                            <label for="typeS" class="col-sm-3 col-form-label">Type :</label>
+                            <div class="col-sm-9">
+                                <input type="input" class="form-control" name="typeS" id="typeS"
+                                 [(ngModel)]="secteur.typeS">
+                                <p *ngIf="erreurSecteur.typeS != ''" class="erreur">{{erreurSecteur.typeS}}</p>
+                            </div>
+                        </div>                    
+                    </form>
+                </div>
+
+                <hr style="width: 100%; margin-top: 10px; margin-bottom: 5px;">
+  
+                <div style="padding: 10px; text-align: right; padding-top:0px; padding-bottom:0px; width: 100%;">
+                    <button *ngIf="!isLoading" class="btn btn-primary" type="button" (click)="modifierSecteur()" >
+                        Modifier
+                    </button>
+                    <button *ngIf="isLoading" class="btn btn-primary" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Chargement...
+                    </button>
+                </div>
+            </div>
+        </app-card>
+    </div>
+</div>

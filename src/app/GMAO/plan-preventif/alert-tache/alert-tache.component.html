@@ -1,0 +1,72 @@
+<div class="col-xl-14">
+    <app-card cardTitle="Liste alerte des taches" blockClass="table-border-style">
+        <form action="javascript:">
+            <div class="pagination-inner">
+                <app-filtre-date-button (getDatee)="getReleveClient($event)"></app-filtre-date-button>
+                <div class="col-sm-3" style="z-index: 99;">
+                    <app-autocomplete (addElementEvent)="setPlanPreventifID($event)"
+                        [keySelected]="keySelectedPlanPreventif" [objet]="objetPlanPreventif"
+                        [articles]="allPlanPreventifs" [idSelected]="idPlanPreventif" [idHtml]="idPlanPreventif"
+                        (openAddElementEvent)="openModalAjoutPlanPreventif()">
+                    </app-autocomplete>
+                </div>
+            </div>
+
+            <div class="col-sm-12">
+                <div class="form-group row">
+                    <label for="nbJours" class="col-sm-3 col-form-label">Nombre de jours</label>
+                    <div class="col-sm-3">
+                        <input type="number" class="form-control" id="nbJours" name="nbJours" [(ngModel)]="alerte.nbJours">
+                        <p *ngIf="erreurAlerte != ''" class="erreur">{{erreurAlerte}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped" id="output">
+                    <thead>
+                        <tr>
+                            <th *ngFor="let key of objectKeys(itemsVariableG)">
+                                <div class="th-tableau" (click)="changeCroissante(key)">
+                                    {{itemsG[key]}}
+                                    <div class="buttons-croissante">
+
+                                        <i class="fas fa-caret-up croissante {{key}}-croissante"></i>
+                                        <i class="fas fa-caret-down croissante {{key}}-croissante"></i>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let itemG of tabAllRegroupeElem">
+                            <td *ngFor="let key of objectKeys(itemsVariableG)">
+                                <div *ngIf="key == 'etatTache'">
+                                    <app-autocomplete (addElementEvent)="setEtatTacheID($event)"
+                                        [keySelected]="keySelectedEtatTache" [objet]="objetEtatTache"
+                                        [articles]="allEtatTaches" [idSelected]="itemG[key]" [idHtml]="itemG.id">
+                                    </app-autocomplete>
+                                </div>
+                                <div *ngIf="key == 'check'" style="display:block; width: 100%; text-align: center;">
+                                    <input type="checkbox" [name]="itemG.id" [id]="itemG.id"
+                                        (click)="clickFait(itemG.id)">
+                                </div>
+                                <span
+                                    *ngIf="['numero', 'planPreventif', 'machine', 'montant'].includes(key)">{{itemG[key]}}</span>
+                                <span *ngIf="key == 'dateExecution'"
+                                    style="display:block; width: 100%; text-align: center;">{{getDate(itemG[key])}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <app-spinner2 *ngIf="isLoading"></app-spinner2>
+            <br>
+        </form>
+    </app-card>
+</div>
+
+<app-add-element-modal-gmao [isLoading]="isLoading" [isOpenModalAjoutElement]="isOpenModalAjoutPlanPreventif"
+    [idAjoutElementModal]="idAjoutPlanPreventifModal" (closeModalAjoutElement)="closeModalAjoutPlanPreventif()"
+    [typeElement]="typeElement"></app-add-element-modal-gmao>

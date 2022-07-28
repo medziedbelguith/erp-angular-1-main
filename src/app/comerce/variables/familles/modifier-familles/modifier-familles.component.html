@@ -1,0 +1,126 @@
+<div class="row">
+    <div class="col-sm-12 min-Width">
+        <app-card [hidHeader]="true">
+            <!-- Partie Header -->
+            <div class="row">
+                <!-- Partie formulaire à Gauche en haut -->
+                <div class="col-md-6">
+                    <form action="javascript:">
+                        <div class="form-group row">
+                            <label for="libelle" class="col-sm-3 col-form-label">Libellé</label>
+                            <div class="col-sm-9">
+                                <input type="input" class="form-control" name="libelle" id="libelle"
+                                    placeholder="Enter libelle" [(ngModel)]="famille.libelle">
+                                <p *ngIf="erreurFamille.libelle != ''" class="erreur">{{erreurFamille.libelle}}</p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Les sous familles
+                                                <button class="btn btn-info" (click)="openModalAjout()">
+                                                    Ajouter
+                                                </button>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <input type="text" class="zone_reche" id="ordre" name="ordre"
+                                                    [(ngModel)]="motRecherche" placeholder="Recherche"
+                                                    (ngModelChange)="recherche()">
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngIf="sousfamilles.length != 0" class="scroll-famille">
+                                        <tr *ngFor="let item of sousfamilles">
+                                            <td>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" [id]="item.id"
+                                                        (change)="addSousFamille(item)">
+                                                    <label class="custom-control-label"
+                                                        [for]="item.id">{{item.libelle}}</label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody *ngIf="sousfamilles.length == 0">
+                                        <tr>
+                                            <td style="text-align: center;">
+                                                Vide
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="center-div">
+                                <button class="btn btn-primary" (click)="checkAll()">>></button>
+                            </div>
+                            <div class="center-div">
+                                <button class="btn btn-primary" (click)="checkAllSelect()"><<</button>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Les sous familles selectionnées</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngIf="sousfamillesSelected.length != 0" class="scroll-famille">
+                                        <tr *ngFor="let item of sousfamillesSelected">
+                                            <td>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" [id]="item.id"
+                                                        (change)="removeSousFamilleSelected(item)" checked>
+                                                    <label class="custom-control-label"
+                                                        [for]="item.id">{{item.libelle}}</label>
+                                                </div>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody *ngIf="sousfamillesSelected.length == 0" class="scroll-famille">
+                                        <tr>
+                                            <td style="text-align: center;">
+                                                Vide
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr style="width: 100%; margin-top: 10px; margin-bottom: 5px;">
+  
+            <div style="padding: 10px; text-align: right; padding-top:0px; padding-bottom:0px; width: 100%;">
+                
+                <button *ngIf="!isLoading" class="btn btn-primary" type="button" (click)="modifierFamille()" style="height: 38px; margin-right: 15px; font-size: 11px; width:100px;">
+                    Modifier
+                </button>
+                <button *ngIf="isLoading" class="btn btn-primary" type="button" disabled style=" padding:5px; margin-right: 15px; font-size: 11px; width:100px;">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Chargement...
+                </button>
+            
+            </div>
+        </app-card>
+    </div>
+</div>
+
+<app-add-element-modal [isLoading]="isLoading" [isOpenModalAjoutElement]="isOpenModalAjoutElement"
+[idAjoutElementModal]="idAjoutElementModal" (closeModalAjoutElement)="closeModalAjoutElement()" [typeElement]="typeElement"></app-add-element-modal>

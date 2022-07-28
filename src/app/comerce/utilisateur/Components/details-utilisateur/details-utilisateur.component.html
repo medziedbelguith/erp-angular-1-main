@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-sm-12 min-Width">
+<app-card [hidHeader]="true">
+   
+                 <div class="form-group row">
+                    <label class="col-sm-6 col-form-label font-weight-bolder">Nom</label>
+                    <label class="col-sm-6 col-form-label"> {{utilisateur.nom}} </label>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-6 col-form-label font-weight-bolder">Prenom</label>
+                    <label class="col-sm-6 col-form-label"> {{utilisateur.prenom}} </label>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-6 col-form-label font-weight-bolder">Role</label>
+                    <label class="col-sm-6 col-form-label">  {{getRole(utilisateur.role)}} </label>
+                </div>
+        
+                <div class="form-group row">
+                    <label class="col-sm-6 col-form-label font-weight-bolder">Email</label>
+                    <label class="col-sm-6 col-form-label">  {{utilisateur.email}} </label>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-6 col-form-label font-weight-bolder">Telephone</label>
+                    <label class="col-sm-6 col-form-label">  {{utilisateur.telephone}} </label>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-6 col-form-label font-weight-bolder">Adresse</label>
+                    <label class="col-sm-6 col-form-label">  {{utilisateur.adresse}} </label>
+                </div>
+
+                <hr style="width: 100%; margin-top: 10px; margin-bottom: 5px;">
+  
+                <div style="padding: 10px; text-align: right; padding-top:0px; padding-bottom:0px; width: 100%;">
+                  
+                    <button *ngIf="isLoading" class="btn btn-primary" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Chargement...
+                    </button>
+              
+                </div>
+           
+</app-card>
+
+</div>
+</div>

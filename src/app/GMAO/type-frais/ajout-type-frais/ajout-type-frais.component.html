@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card [hidHeader]="true">
+            <!-- Partie Header -->
+            <div class="form-group row">
+                <div class="text-titre">
+                    <h3>Ajouter TypeFrais</h3>
+                </div>
+                <div class="left-button">
+                    <button *ngIf="!isLoading" class="btn btn-primary" type="button" (click)="ajoutTypeFrais()">
+                        Enregister
+                    </button>
+                    <button *ngIf="isLoading" class="btn btn-primary" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Chargement...
+                    </button>
+                </div>
+            </div>
+            <hr >
+            <div class="row">
+                <!-- Partie formulaire à Gauche en haut -->
+                <div class="col-md-6">
+                    <form action="javascript:">
+                        <div class="form-group row">
+                            <label for="libelle" class="col-sm-3 col-form-label">Libellé</label>
+                            <div class="col-sm-9">
+                                <input type="input" class="form-control" name="libelle" id="libelle"
+                                    placeholder="Enter libelle" [(ngModel)]="typeFrais.libelle">
+                                <p *ngIf="erreurTypeFrais.libelle != ''" class="erreur">{{erreurTypeFrais.libelle}}</p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </app-card>
+    </div>
+</div>

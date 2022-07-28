@@ -1,0 +1,108 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card [hidHeader]="true">
+            <!-- Partie Header -->
+            <div class="form-group row" style="justify-content: space-between !important;">
+                <div class="text-titre">
+                    <h3>Modifier PointageCompteur</h3>
+                </div>
+                <div class="left-button" style="float:right;">
+                    <button *ngIf="!isLoading" class="btn btn-primary" type="button" (click)="modifierPointageCompteur()">
+                        Modifier
+                    </button>
+                    <button *ngIf="isLoading" class="btn btn-primary" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Chargement...
+                    </button>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <!-- Partie formulaire à Gauche en haut -->
+                <div class="col-md-12">
+                    <form action="javascript:">
+                        <div class="form-group row">
+                            <label for="nom" class="col-sm-3 col-form-label">Numero</label>
+                            <div class="col-sm-9">
+
+                                <div class="row"
+                                    style="margin-left: 0px !important; margin-right: 0px !important; flex-wrap: nowrap;">
+                                    <input *ngIf="erreurPointageCompteur.numero == ''" type="input"
+                                        class="form-control col-sm-9" name="numero" id="numero"
+                                        [(ngModel)]="pointageCompteur.numero" readonly>
+
+                                    <input *ngIf="erreurPointageCompteur.numero != ''" type="input"
+                                        class="form-control col-sm-9 border-erreur" name="numero" id="numero"
+                                        [(ngModel)]="pointageCompteur.numero" readonly>
+
+                                    <button class="btn btn-outline-info col-sm-3"
+                                        style="padding: 4px; height: 29px !important;" (click)="getCodeFunction()">
+                                        <i *ngIf="!isLoading" class="fas fa-cog"></i>
+                                        <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status"
+                                            aria-hidden="true"></span>
+                                    </button>
+                                </div>
+
+                                <p *ngIf="erreurPointageCompteur.numero != ''" class="erreur">
+                                    {{erreurPointageCompteur.numero}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="date" class="col-sm-3 col-form-label">Date</label>
+                            <div class="col-sm-9">
+                                <input type="date" class="form-control" id="date" name="date"
+                                    [(ngModel)]="pointageCompteur.date">
+                                <p *ngIf="erreurPointageCompteur.date != ''" class="erreur">
+                                    {{erreurPointageCompteur.date}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="vehicule" class="col-sm-3 col-form-label">Vehicule</label>
+                            <div class="col-sm-9">
+                                <app-autocomplete (addElementEvent)="setVehiculeID($event)"
+                                    [keySelected]="keySelectedVehicule" [objet]="objetVehicule"
+                                    [articles]="allVehicules" [idSelected]="pointageCompteur.vehicule"
+                                    idHtml="ajoutVehicule" (openAddElementEvent)="openModalAjoutVehicule()">
+                                </app-autocomplete>
+                                <p *ngIf="erreurPointageCompteur.vehicule != ''" class="erreur">
+                                    {{erreurPointageCompteur.vehicule}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="chauffeur" class="col-sm-3 col-form-label">Chauffeur</label>
+                            <div class="col-sm-9">
+                                <app-autocomplete (addElementEvent)="setChauffeurID($event)"
+                                    [keySelected]="keySelectedChauffeur" [objet]="objetChauffeur"
+                                    [articles]="allChauffeurs" [idSelected]="pointageCompteur.chauffeur"
+                                    idHtml="ajoutChauffeur" (openAddElementEvent)="openModalAjoutChauffeur()">
+                                </app-autocomplete>
+                                <p *ngIf="erreurPointageCompteur.chauffeur != ''" class="erreur">
+                                    {{erreurPointageCompteur.chauffeur}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="valeurCompteur" class="col-sm-3 col-form-label">Valeur Compteur</label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" name="valeurCompteur" id="valeurCompteur"
+                                 [(ngModel)]="pointageCompteur.valeurCompteur">
+                                <p *ngIf="erreurPointageCompteur.valeurCompteur != 0" class="erreur">
+                                    {{erreurPointageCompteur.valeurCompteur}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="notes" class="col-sm-3 col-form-label">Notes</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="notes" name="notes" [(ngModel)]="pointageCompteur.notes"
+                                    placeholder="Notes"></textarea>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </app-card>
+    </div>
+</div>
+<app-add-element-modal-gmao [isLoading]="isLoading" [isOpenModalAjoutElement]="isOpenModalAjoutElement"
+    [idAjoutElementModal]="idAjoutElementModal" (closeModalAjoutElement)="closeModalAjoutElement()"
+    [typeElement]="typeElement"></app-add-element-modal-gmao>

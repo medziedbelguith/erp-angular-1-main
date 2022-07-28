@@ -1,0 +1,132 @@
+<ng-template #contentM #item let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Modifier prix <span style="font-size: 13px;"></span></h4>
+        <p type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </p>
+    </div>
+    <div class="modal-body">
+        <div class="form-group row">
+            <label for="numero" class="col-sm-2 col-form-label">Sous article</label>
+            <div class="col-sm-10">
+                <app-autocomplete [bordureRed]="erreurSousArticle.sousArticleId != ''" modeMultiSortie=true
+                    [shemaMultiSortie]="shemaMultiSortie" (addElementEvent)="setSousArticleID($event)"
+                    [keySelected]="keySelectedArticle" [objet]="shemaArticle2" [articles]="allSousArticle"
+                    [idSelected]="sousArticle.sousArticleId" idHtml="2" [itemsNumberSimple]="shemaArticle2Number"
+                    [itemsNumberQuantite]="shemaArticle2Quantite" (openAddElementEvent)="openModalAjoutArticle()">
+                </app-autocomplete>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="quantite" class="col-sm-2 col-form-label">Quantité</label>
+            <div class="col-sm-10">
+                <app-input-number-vergule [messageErreur]="erreurSousArticle.quantite" [field]="sousArticle"
+                    key="quantite" idUnique="quantite22"></app-input-number-vergule>
+                <p *ngIf="erreurSousArticle.quantite != ''" class="erreur">{{erreurSousArticle.quantite}}</p>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="modifierSousArticle(1)">Modifier</button>
+    </div>
+</ng-template>
+
+<!-- Model d'ajout -->
+<div class="session-modal-container">
+    <ng-template #content let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Ajouter sous article</h4>
+            <p type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </p>
+        </div>
+        <div class="modal-body">
+            <div class="form-group row">
+                <label for="numero" class="col-sm-2 col-form-label">Sous article</label>
+                <div class="col-sm-10">
+                    <app-autocomplete [bordureRed]="erreurSousArticle.sousArticleId != ''" modeMultiSortie=true
+                        [shemaMultiSortie]="shemaMultiSortie" (addElementEvent)="setSousArticleID($event)"
+                        [keySelected]="keySelectedArticle" [objet]="shemaArticle2" [articles]="allSousArticle"
+                        [idSelected]="sousArticle.sousArticleId" idHtml="2" [itemsNumberSimple]="shemaArticle2Number"
+                        [itemsNumberQuantite]="shemaArticle2Quantite" (openAddElementEvent)="openModalAjoutArticle()">
+                    </app-autocomplete>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="quantite" class="col-sm-2 col-form-label">Quantité</label>
+                <div class="col-sm-10">
+                    <app-input-number-vergule [messageErreur]="erreurSousArticle.quantite" [field]="sousArticle"
+                        key="quantite" idUnique="quantite22"></app-input-number-vergule>
+                    <p *ngIf="erreurSousArticle.quantite != ''" class="erreur">{{erreurSousArticle.quantite}}</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="enregistrerSousArticle()">Enregistrer</button>
+        </div>
+    </ng-template>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <app-card [hidHeader]="true">
+            <form action="javascript:">
+                <div class="form-group row">
+                    <label for="numero" class="col-sm-2 col-form-label">Article parent</label>
+                    <div class="col-sm-10">
+                        <app-autocomplete [bordureRed]="erreurArticle.reference != ''" modeMultiSortie=true
+                            [shemaMultiSortie]="shemaMultiSortie" (addElementEvent)="setArticleID($event)"
+                            [keySelected]="keySelectedArticle" [objet]="shemaArticle2" [articles]="allArticles"
+                            [idSelected]="itemArticleSelected.article" idHtml="1"
+                            [itemsNumberSimple]="shemaArticle2Number" [itemsNumberQuantite]="shemaArticle2Quantite"
+                            (openAddElementEvent)="openModalAjoutArticle()">
+                        </app-autocomplete>
+                    </div>
+                </div>
+                <hr>
+                <div class="col-xl-14">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th *ngFor="let key of objectKeys(itemsVariable)">{{items[key]}}</th>
+                                    <th *ngIf="isDetails == '0'"><button class="btn btn-sm btn-outline-primary"
+                                            (click)="open(content)">Ajouter</button></th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="inisialiserEmptyTab()">
+                                <tr *ngFor="let item of listGL">
+                                    <td *ngFor="let key of objectKeys(itemsVariable)">
+                                        <span style="float:left;">{{item[key]}}</span>
+                                    </td>
+                                    <td *ngIf="isDetails == '0'">
+                                        <button type="button"
+                                            class="btn btn-icon btn-outline-success button-edit-delete"
+                                            data-toggle="modal" (click)="openModifier(contentM,item)">
+                                            <i class="feather icon-edit"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-icon btn-outline-danger button-edit-delete"
+                                            data-toggle="modal" (click)="supprimerSousArticle(item.numero)">
+                                            <i class="feather icon-trash-2"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr *ngFor="let item of tabEmpty">
+                                    <td colspan="30">
+                                        <span style="color:transparent;">i</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <button type="button" class="btn btn-primary" style="float: right;"
+                        (click)="valider()">Valider</button>
+                </div>
+
+            </form>
+        </app-card>
+    </div>
+</div>

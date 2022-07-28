@@ -1,0 +1,159 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card [hidHeader]="true">
+            <!-- Partie Header -->
+            <div class="form-group row">
+                <div class="text-titre">
+                    <h3>Ajouter une Sociéte</h3>
+                </div>
+                <div class="left-button">
+                    <button *ngIf="!isLoading" class="btn btn-primary" type="button" (click)="ajoutSociete()">
+                        Enregister
+                    </button>
+                    <button *ngIf="isLoading" class="btn btn-primary" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Chargement...
+                    </button>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <!-- Partie formulaire à Gauche en haut -->
+                <div class="col-md-6">
+                    <form action="javascript:">
+                        <div class="form-group row">
+                            <label for="raisonSociale" class="col-sm-4 col-form-label">Raison Sociale</label>
+                            <div class="col-sm-8">
+                                <input type="input" class="form-control" name="raisonSociale" id="raisonSociale"
+                                    placeholder="Enter raisonSociale" [(ngModel)]="societe.raisonSociale">
+                                <p *ngIf="erreurSociete.raisonSociale != ''" class="erreur">{{erreurSociete.raisonSociale}}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="raisonSociale" class="col-sm-4 col-form-label">Societe parent</label>
+                            <div class="col-sm-8">
+                                <app-autocomplete (addElementEvent)="setSocieteID($event)"
+                                    [keySelected]="keySelectedSociete" [objet]="objetSociete"
+                                    [articles]="societes" [idSelected]="societe.societeParent" [idHtml]="5">
+                                </app-autocomplete>
+
+                                <p *ngIf="erreurSocieteParent != ''" class="erreur">{{erreurSocieteParent}}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="matriculeFiscale" class="col-sm-4 col-form-label">Matricule Fiscale</label>
+                            <div class="col-sm-8">
+                                <input type="input" class="form-control" id="matriculeFiscale" name="matriculeFiscale"
+                                    [(ngModel)]="societe.matriculeFiscale">
+                                <p *ngIf="erreurSociete.matriculeFiscale != ''" class="erreur">{{erreurSociete.matriculeFiscale}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="responsable" class="col-sm-4 col-form-label">Responsable</label>
+                            <div class="col-sm-8">
+                                <input type="input" class="form-control" id="responsable" name="responsable"
+                                    [(ngModel)]="societe.responsable">
+                                <p *ngIf="erreurSociete.responsable != ''" class="erreur">{{erreurSociete.responsable}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="cinResponable" class="col-sm-4 col-form-label">CIN Responable</label>
+                            <div class="col-sm-8">
+                                <input type="input" class="form-control" id="cinResponable" name="cinResponable"
+                                    [(ngModel)]="societe.cinResponable">
+                                <p *ngIf="erreurSociete.cinResponable != ''" class="erreur">{{erreurSociete.cinResponable}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="telephones" class="col-sm-4 col-form-label">Téléphones</label>
+                            <div class="col-sm-8">
+                                <input type="input" class="form-control" id="telephones" name="telephones"
+                                    [(ngModel)]="societe.telephones">
+                                <p *ngIf="erreurSociete.telephones != ''" class="erreur">{{erreurSociete.telephones}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="mobiles" class="col-sm-4 col-form-label">Mobiles</label>
+                            <div class="col-sm-8">
+                                <input type="input" class="form-control" id="mobiles" name="mobiles"
+                                    [(ngModel)]="societe.mobiles">
+                                <p *ngIf="erreurSociete.mobiles != ''" class="erreur">{{erreurSociete.mobiles}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="fax" class="col-sm-4 col-form-label">Fax</label>
+                            <div class="col-sm-8">
+                                <input type="input" class="form-control" id="fax" name="fax"
+                                    [(ngModel)]="societe.fax">
+                                <p *ngIf="erreurSociete.fax != ''" class="erreur">{{erreurSociete.fax}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="adresse" class="col-sm-4 col-form-label">Localité</label>
+                            <div class="col-sm-8">
+                                <input type="input" class="form-control" id="adresse" name="adresse"
+                                    [(ngModel)]="societe.adresse">
+                                <p *ngIf="erreurSociete.adresse != ''" class="erreur">{{erreurSociete.adresse}}</p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Partie formulaire à Droite en haut -->
+                <div class="col-md-6">
+                    <form action="javascript:">
+                        <div class="form-group row">
+                            <label for="email" class="col-sm-3 col-form-label">Email</label>
+                            <div class="col-sm-9">
+                                <input type="input" class="form-control" id="email" name="email"
+                                    [(ngModel)]="societe.email">
+                                <p *ngIf="erreurSociete.email != ''" class="erreur">{{erreurSociete.email}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="paysSociete" class="col-sm-3 col-form-label">Pays</label>
+                            <div class="col-sm-9">
+                                <input type="input" class="form-control" id="paysSociete" name="paysSociete"
+                                    [(ngModel)]="societe.pays">
+                                <p *ngIf="erreurSociete.pays != ''" class="erreur">{{erreurSociete.pays}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="gouvernoratSociete" class="col-sm-3 col-form-label">Gouvernorat</label>
+                            <div class="col-sm-9">
+                                <input type="input" class="form-control" id="gouvernoratSociete" name="gouvernoratSociete"
+                                    [(ngModel)]="societe.gouvernorat">
+                                <p *ngIf="erreurSociete.gouvernorat != ''" class="erreur">{{erreurSociete.gouvernorat}}</p>
+                            </div>
+                        </div>
+                       <div class="form-group row">
+                            <label for="delegationSociete" class="col-sm-3 col-form-label">Délégation</label>
+                            <div class="col-sm-9">
+                                <input type="input" class="form-control" id="delegation" name="delegationSociete"
+                                    [(ngModel)]="societe.delegation">
+                                <p *ngIf="erreurSociete.delegation != ''" class="erreur">{{erreurSociete.delegation}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="localiteSociete" class="col-sm-3 col-form-label">Localité</label>
+                            <div class="col-sm-9">
+                                <input type="input" class="form-control" id="localiteSociete" name="localiteSociete"
+                                    [(ngModel)]="societe.localite">
+                                <p *ngIf="erreurSociete.localite != ''" class="erreur">{{erreurSociete.localite}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="codePostaleSociete" class="col-sm-3 col-form-label">Code Postale</label>
+                            <div class="col-sm-9">
+                                <input type="input" class="form-control" id="codePostaleSociete" name="codePostaleSociete"
+                                    [(ngModel)]="societe.codePostale">
+                                <p *ngIf="erreurSociete.codePostale != ''" class="erreur">{{erreurSociete.codePostale}}</p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </app-card>
+    </div>
+</div>

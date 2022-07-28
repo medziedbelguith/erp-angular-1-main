@@ -1,0 +1,78 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card [hidHeader]="true">
+            <!-- Partie Header -->
+            <div class="form-group row" style="justify-content: space-between !important;">
+                <div class="text-titre">
+                    <h3>Modifier Technicien</h3>
+                </div>
+                <div class="left-button" style="float:right;">
+                    <button *ngIf="!isLoading" class="btn btn-primary" type="button" (click)="modifierTechnicien()">
+                        Modifier
+                    </button>
+                    <button *ngIf="isLoading" class="btn btn-primary" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Chargement...
+                    </button>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <!-- Partie formulaire à Gauche en haut -->
+                <div class="col-md-6">
+                    <form action="javascript:">
+                        <div class="form-group row">
+                            <label for="nom" class="col-sm-3 col-form-label">Nom</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="nom" id="nom"
+                                 [(ngModel)]="technicien.nom">
+                                <p *ngIf="erreurTechnicien.nom != ''" class="erreur">{{erreurTechnicien.nom}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="prenom" class="col-sm-3 col-form-label">Prenom</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="prenom" id="prenom"
+                                [(ngModel)]="technicien.prenom">
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="role" class="col-sm-3 col-form-label">Role</label>
+                            <div class="col-sm-9">
+                                <select  class="form-control" name="role" id="role" [(ngModel)]="technicien.role">
+                                    <option *ngFor='let item of allRoles' [value]="item.libelle">{{item.libelle}}</option>
+                                </select>
+                                <p *ngIf="erreurTechnicien.role != ''" class="erreur">{{erreurTechnicien.role}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="telephone" class="col-sm-3 col-form-label">Téléphone</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="telephone" id="telephone"
+                                [(ngModel)]="technicien.telephone">
+                                <p *ngIf="erreurTechnicien.telephone != ''" class="erreur">{{erreurTechnicien.telephone}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email" class="col-sm-3 col-form-label">Email</label>
+                            <div class="col-sm-9">
+                                <input type="email" class="form-control" name="email" id="email"
+                                [(ngModel)]="technicien.email">
+                                <p *ngIf="erreurTechnicien.email != ''" class="erreur">{{erreurTechnicien.email}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="adresse" class="col-sm-3 col-form-label">Adresse</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="adresse" id="adresse"
+                                [(ngModel)]="technicien.adresse">
+                                <p *ngIf="erreurTechnicien.adresse != ''" class="erreur">{{erreurTechnicien.adresse}}</p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </app-card>
+    </div>
+</div>

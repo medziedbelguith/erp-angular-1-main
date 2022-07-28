@@ -1,0 +1,15 @@
+
+<app-controle-acces [avoirAccee]="informationGenerale.verifierAccee('listBonAchats')"></app-controle-acces>
+
+<app-input-bon-livraison
+    *ngIf="informationGenerale.verifierAccee('listBonAchats')"
+    [lienAjoute]="lienAjoute"
+    [apiList]="apiList"
+    [lienGetById]="lienGetById"
+    [titreDocument]="titreDocument"
+    [titreDocumentTransfert]="titreDocumentTransfert"
+    [modeTiere]="modeTiere"
+    [titreCrud]="titreCrud"
+    [pageList]="pageList"
+    [apiParametres]="apiParametres"
+></app-input-bon-livraison>

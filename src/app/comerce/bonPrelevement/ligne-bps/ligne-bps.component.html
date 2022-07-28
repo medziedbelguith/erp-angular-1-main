@@ -1,0 +1,137 @@
+<app-card [hidHeader]="true">
+    <div class="col-sm-12" style="padding: 10px;">
+        <form action="javascript:">
+            
+            <div class="form-group row">
+                <label for="codeBarre" class="col-sm-2 col-form-label">Article</label>
+                <div class="col-sm-10">
+                    
+                    <app-autocomplete modeMultiSortie=true [shemaMultiSortie]="shemaMultiSortie"
+                    (addElementEvent)="setArticleID($event)" [keySelected]="keySelectedArticle" [objet]="shemaArticle2" [articles]="articles" [idSelected]="itemArticleSelected.article" idHtml="1"> </app-autocomplete>
+    
+                    <p *ngIf="erreurArticle.reference != ''" class="erreur">{{erreurArticle.reference}}
+                    </p>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+
+                <div class="col-sm-4" >
+                   <label for="prixVenteHT" class=" col-form-label" style="font-size: 12px;">Prix vente HT(DT)</label>
+                   <div class="col-sm-12 collapse-input">
+                        <input type="number" class="form-control desactive-text-input" name="prixVenteHT222" id="prixVenteHT222"
+                             [(ngModel)]="itemArticleSelected.prixVenteHT" (ngModelChange)="changePrixTotal()" (focus)="showInput($event)">
+                        
+                         <span class="form-control desactive-text-span" name="prixVenteHT222" (click)="showInput($event)" >{{getNumber(itemArticleSelected.prixVenteHT)}} </span>
+                    </div>
+                    <p *ngIf="erreurArticle.prixVenteHT != ''" class="erreur">{{erreurArticle.prixVenteHT}}</p>
+                    
+                </div>
+
+                <div class="col-sm-4">
+                    <label for="quantite" class="col-form-label" style="font-size: 12px;">Quantité</label>
+                    <div class="col-sm-12 collapse-input">
+                        <input type="number" class="form-control desactive-text-input" name="quantite" id="quantite"
+                        [(ngModel)]="itemArticleSelected.quantite" (focus)="showInput($event)">
+                    
+                        <span class="form-control desactive-text-span" (click)="showInput($event)" name="quantite">{{getNumber(itemArticleSelected.quantite)}} </span>
+                    </div>
+                    <p *ngIf="erreurArticle.quantite != ''" class="erreur">{{erreurArticle.quantite}}</p>
+                </div>
+
+                <div class="col-sm-4">
+                    <label for="unite" class="col-form-label" style="font-size: 12px;">Unité</label>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" name="unite" id="unite"
+                        [(ngModel)]="itemArticleSelected.unite" >
+                    
+                    </div>
+                    <p *ngIf="erreurArticle.unite != ''" class="erreur">{{erreurArticle.unite}}</p>
+                </div>
+            
+            </div>
+
+            <div class="form-group row" style="margin-bottom: 0px;">
+                
+                <div class="col-sm-12" style="text-align: center; margin-top: 10px;">
+                    <button type="button" (click)="ajoutArticle()" class="btn btn-success ng-tns-c112-14" style="font-size: 12px; padding:5px; height: 30px; display: inline-block; white-space: nowrap; margin-left: 3px;">
+                        Ajouter Article <i class="fas fa-plus"></i>
+                   </button> 
+                </div>
+
+            </div>
+            
+        </form>
+    </div>
+    <div class="col-sm-12">
+        <form action="javascript:">
+            
+            <div class="form-group row">
+               
+                <div class="col-sm-12" style=" margin-top: 10px;">
+                     
+                    <h3>Liste des articles</h3>
+                    <table class="table table-striped" id="output" style="width: 100%; overflow-x: auto;">
+                        <thead>
+                            <tr>
+                                <th *ngFor="let key of objectKeys(shemaArticle)" >
+                                    <div class="th-tableau">
+                                        {{shemaArticle[key]}} 
+                                    </div>
+                                </th>
+                                
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="articlesSelected.length > 0">
+        
+                            <tr *ngFor="let item of articlesSelected" >
+                              
+                                <td *ngFor="let key of objectKeys(shemaArticle)">
+                                    
+                                    <span *ngIf="!allTabNumbers.includes(key)" >{{item[key]}}</span>
+
+                                    <div *ngIf="tabNumbers.includes(key)" class="col-sm-12 collapse-input">
+                                        <input type="number" class="form-control desactive-text-input collapse-input-table" [name]="key+item['numero']" [id]="key+item['numero']"
+                                             [(ngModel)]="item[key]" (focus)="showInput2($event)">
+                                    
+                                        <span [attr.name]="key+item['numero']" class="form-control desactive-text-span collapse-input-table" (click)="showInput($event)" >{{getNumber(item[key])}} </span>
+                                    </div>
+
+                                </td>
+                           
+                                <td>
+                                    <a *ngIf="item.numero != 1" href="javascript:" class="btn btn-icon btn-outline-info" style="width:30px; height: 30px; margin-right: 5px;" (click)="deplaceLigne(item.numero - 1, -1)">
+                                        <i _ngcontent-myx-c121="" class="fa fa-arrow-up"></i>
+                                    </a>
+                                    <a *ngIf="item.numero != articlesSelected.length" href="javascript:" class="btn btn-icon btn-outline-info" style="width:30px; height: 30px; margin-right: 5px;" (click)="deplaceLigne(item.numero - 1, 1)">
+                                        <i _ngcontent-myx-c121="" class="fa fa-arrow-down"></i>
+                                    </a>
+                                    <a  href="javascript:" class="btn btn-icon btn-outline-danger" style="width:30px; height: 30px;" (click)="openModalDelete(item.numero, item.reference)">
+                                        <i _ngcontent-myx-c121="" class="feather icon-trash-2"></i>
+                                    </a>
+                                </td>
+    
+                            </tr>
+        
+                        </tbody>
+
+                        <tbody *ngIf="articlesSelected.length == 0">
+                            <tr>
+                              <td style="text-align: center;" colspan="9">
+                                Vide
+                              </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+    
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <app-delete-modal [isLoading]="isLoading" [isOpenModalDelete]="isOpenModalDelete" [idDeleteModal]="numeroItemDelete" [params1Delete]="params1Delete" [params2Delete]="params2Delete" (deleteItem)="deleteItem()" (closeModalDelete)="closeModalDelete()" ></app-delete-modal>
+ 
+</app-card>
+

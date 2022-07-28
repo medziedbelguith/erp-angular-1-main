@@ -1,0 +1,128 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card [hidHeader]="true">
+            <!-- Partie Header -->
+            <div class="form-group row">
+                <div class="text-titre">
+                    <h3>Modifier tache Projet Interne</h3>
+                </div>
+                <div class="left-button">
+                    <button *ngIf="!isLoading" class="btn btn-primary" (click)="modifierTacheProjetInterne()">
+                        Modifier
+                    </button>
+                    <button *ngIf="isLoading" class="btn btn-primary" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Chargement...
+                    </button>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <!-- Partie formulaire à Gauche en haut -->
+                <div class="col-sm-6">
+                    <form action="javascript:" style="margin-left: 50px;">
+                        <div class="form-group row">
+                            <label for="reference" class="col-sm-4 col-form-label">reference</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="reference" id="reference"
+                                    [(ngModel)]="tacheProjetInterne.reference">
+                                <p *ngIf="erreurTacheProjetInterne.reference != ''" class="erreur">
+                                    {{erreurTacheProjetInterne.reference}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="libelle" class="col-sm-4 col-form-label">libelle</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="libelle" id="libelle"
+                                    [(ngModel)]="tacheProjetInterne.libelle">
+                                <p *ngIf="erreurTacheProjetInterne.libelle != ''" class="erreur">
+                                    {{erreurTacheProjetInterne.libelle}}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="ProjetInterne" class="col-sm-4 col-form-label">ProjetInterne</label>
+                            <div class="col-sm-8">
+                                <app-autocomplete (addElementEvent)="setProjetInterneID($event)"
+                                    [keySelected]="keySelectedProjetInterne" [objet]="objetProjetInterne"
+                                    [articles]="allProjetInternes" [idSelected]="tacheProjetInterne.projetInterne"
+                                    [idHtml]="20"></app-autocomplete>
+                                <p *ngIf="erreurTacheProjetInterne.projetInterne != ''" class="erreur">
+                                    {{erreurTacheProjetInterne.projetInterne}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="affecteA" class="col-sm-4 col-form-label">affecteA</label>
+                            <div class="col-sm-8">
+                                <app-autocomplete (addElementEvent)="setPersonnelID($event)"
+                                    [keySelected]="keySelectedPersonnel" [objet]="objetPersonnel"
+                                    [bordureRed]="erreurTacheProjetInterne.affecteA != ''" [articles]="allPersonnels"
+                                    [idSelected]="tacheProjetInterne.affecteA" [idHtml]="40"
+                                    (openAddElementEvent)="openModalAjoutPersonnel()">
+                                </app-autocomplete>
+
+                                <p *ngIf="erreurTacheProjetInterne.affecteA != ''" class="erreur">
+                                    {{erreurTacheProjetInterne.affecteA}}
+                                </p>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <!-- Partie formulaire à Droite en haut -->
+                <div class="col-md-6">
+                    <form action="javascript:">
+                        <div class="form-group row">
+                            <label for="date" class="col-sm-4 col-form-label">dateDebut</label>
+                            <div class="col-sm-8">
+                                <input type="datetime-local" class="form-control" id="dateDebut" name="dateDebut"
+                                    [(ngModel)]="tacheProjetInterne.dateDebut" max="9999-01-01">
+                                <p *ngIf="erreurTacheProjetInterne.dateDebut != ''" class="erreur">
+                                    {{erreurTacheProjetInterne.dateDebut}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="date" class="col-sm-4 col-form-label">dateFin</label>
+                            <div class="col-sm-8">
+                                <input type="datetime-local" class="form-control" id="dateFin" name="dateFin"
+                                    [(ngModel)]="tacheProjetInterne.dateFin" max="9999-01-01">
+                                <p *ngIf="erreurTacheProjetInterne.dateFin != ''" class="erreur">
+                                    {{erreurTacheProjetInterne.dateFin}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="chargeTravail" class="col-sm-4 col-form-label">charge Travail</label>
+                            <div class="col-sm-8">
+                                <input type="time" class="form-control" id="chargeTravail" name="chargeTravail"
+                                    [(ngModel)]="tacheProjetInterne.chargeTravail">
+                                <p *ngIf="erreurTacheProjetInterne.chargeTravail != ''" class="erreur">
+                                    {{erreurTacheProjetInterne.chargeTravail}}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="avancement" class="col-sm-4 col-form-label">Avancement</label>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control" id="avancement" name="avancement"
+                                    [(ngModel)]="tacheProjetInterne.avancement">
+                                <p *ngIf="erreurTacheProjetInterne.avancement != ''" class="erreur">
+                                    {{erreurTacheProjetInterne.avancement}}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="description" class="col-sm-4 col-form-label">description</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="description" id="description"
+                                    [(ngModel)]="tacheProjetInterne.description">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </app-card>
+    </div>
+</div>

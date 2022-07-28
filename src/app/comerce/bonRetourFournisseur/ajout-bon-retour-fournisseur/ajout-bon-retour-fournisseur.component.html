@@ -1,0 +1,16 @@
+<app-controle-acces [avoirAccee]="informationGenerale.verifierAccee('ajouterBonRetourFournisseur')"></app-controle-acces>
+
+
+
+<app-input-bon-livraison
+    *ngIf="informationGenerale.verifierAccee('ajouterBonRetourFournisseur')"
+    [lienAjoute]="lienAjoute"
+    [apiList]="apiList"
+    [apiParametres]="apiParametres"
+    [lienModifie]="lienModifie"
+    [lienGetById]="lienGetById"
+    [titreDocument]="titreDocument"
+    [modeTiere]="modeTiere"
+    [titreCrud]="titreCrud"
+    [pageList]="pageList"
+></app-input-bon-livraison>

@@ -1,0 +1,260 @@
+<!-- Model d'ajout -->
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Decaler les taches</h4>
+        <p type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </p>
+    </div>
+    <div class="modal-body">
+        <form action="javascript:">
+            <div class="form-group row">
+                <input type="date" name="dateStart" [(ngModel)]="dateStart" (ngModelChange)="getDateStart($event)"
+                    id="dateStart" class="col-sm-5 form-control">
+                <input type="date" [(ngModel)]="dateEnd" (ngModelChange)="getDateEnd($event)" id="dateEnd"
+                    name="dateEnd" class="col-sm-5 form-control" style="margin-left: 10px;">
+            </div>
+            <div class="form-group row">
+                <label for="nbJours" class="col-sm-3 col-form-label">nb Jours</label>
+                <div class="col-sm-3">
+                    <input type="number" class="form-control" id="nbJours" name="nbJours" [(ngModel)]="nbJours">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary"
+            (click)="decalerTache(planPreventif.listTaches,nbJours)">Decaler</button>
+    </div>
+</ng-template>
+<div class="row">
+    <div class="col-sm-12">
+        <app-card [hidHeader]="true">
+            <!-- Partie Header -->
+            <div class="form-group row">
+                <div class="text-titre">
+                    <h3>Ajouter plan préventif</h3>
+                </div>
+                <div class="left-button" style="margin-left: auto;">
+                    <button *ngIf="!isLoading" class="btn btn-primary" type="button" (click)="ajoutPlanPreventif()">
+                        Enregister
+                    </button>
+                    <button *ngIf="isLoading" class="btn btn-primary" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Chargement...
+                    </button>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <!-- Partie formulaire à Gauche en haut -->
+                <div class="col-md-6">
+                    <form action="javascript:">
+                        <div class="form-group row">
+                            <label for="libelle" class="col-sm-3 col-form-label">Libellé</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="libelle" id="libelle"
+                                    placeholder="Enter libelle" [(ngModel)]="planPreventif.libelle">
+                                <p *ngIf="erreurPlanPreventif.libelle != ''" class="erreur">
+                                    {{erreurPlanPreventif.libelle}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="operationPreventif" class="col-sm-3 col-form-label">Operation Pre</label>
+                            <div class="col-sm-9">
+                                <app-autocomplete (addElementEvent)="setOperationPreventifID($event)"
+                                    [keySelected]="keySelectedOperationPreventif" [objet]="objetOperationPreventif"
+                                    [bordureRed]="erreurPlanPreventif.operationPreventif != ''"
+                                    [articles]="allOperationPres" [idSelected]="planPreventif.operationPreventif"
+                                    idHtml="ajouterOperationPreventif"
+                                    (openAddElementEvent)="openModalAjoutOperationPreventif()">
+                                </app-autocomplete>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="machine" class="col-sm-3 col-form-label">Machine</label>
+                            <div class="col-sm-9">
+                                <app-autocomplete (addElementEvent)="setMachineID($event)"
+                                    [keySelected]="keySelectedMachine" [objet]="objetMachine"
+                                    [bordureRed]="erreurPlanPreventif.machine != ''" [articles]="allMachines"
+                                    [idSelected]="planPreventif.machine" idHtml="ajoutMachine"
+                                    (openAddElementEvent)="openModalAjoutMachine()">
+                                </app-autocomplete>
+                                <p *ngIf="erreurPlanPreventif.machine != ''" class="erreur">
+                                    {{erreurPlanPreventif.machine}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="dernierDate" class="col-sm-3 col-form-label">Dernier Date</label>
+                            <div class="col-sm-9">
+                                <input type="date" class="form-control" id="dernierDate" name="dernierDate"
+                                    [(ngModel)]="planPreventif.dernierDate">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="prochaineDate" class="col-sm-3 col-form-label">Prochaine Date</label>
+                            <div class="col-sm-9">
+                                <input type="date" class="form-control" id="prochaineDate" name="prochaineDate"
+                                    [(ngModel)]="planPreventif.prochaineDate" value="planPreventif.dernierDate">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="dureeExecution" class="col-sm-3 col-form-label">Duree Execut°</label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" name="dureeExecution" id="dureeExecution"
+                                    [(ngModel)]="planPreventif.dureeExecution">
+                                <span class="form-control desactive-text-span" (click)="showInput($event)"
+                                    name="dureeExecution">
+                                    {{planPreventif.dureeExecution}} mm
+                                </span>
+                                <p *ngIf="erreurPlanPreventif.dureeExecution != 0" class="erreur">
+                                    {{erreurPlanPreventif.dureeExecution}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="montant" class="col-sm-3 col-form-label">Montant</label>
+                            <div class="col-sm-9 collapse-input">
+                                <app-input-number-vergule [messageErreur]="erreurPlanPreventif.montant != 0"
+                                 [field]="planPreventif" key="montant" 
+                                idUnique="montant222"></app-input-number-vergule>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Partie formulaire à Droite en haut -->
+                <div class="col-md-6">
+                    <form action="javascript:">
+                        <div class="form-group row">
+                            <label for="alerteAvant" class="col-sm-3 col-form-label">Alerte Avant</label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" name="alerteAvant" id="alerteAvant"
+                                    placeholder="Enter alerteAvant" [(ngModel)]="planPreventif.alerteAvant">
+                                <p *ngIf="erreurPlanPreventif.alerteAvant != 0" class="erreur">
+                                    {{erreurPlanPreventif.alerteAvant}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="intervenant" class="col-sm-3 col-form-label">Intervenant</label>
+                            <div class="col-sm-3 custom-control custom-radio">
+                                <input type="radio" id="interne" name="interne" value="oui"
+                                    [(ngModel)]="planPreventif.interne">
+                                <label for="interne">Interne</label>
+                            </div>
+                            <div class="col-sm-3 custom-control custom-radio" style="margin-left: 15px;">
+                                <input type="radio" id="externe" name="interne" value="non"
+                                    [(ngModel)]="planPreventif.interne">
+                                <label for="externe">Externe</label>
+                            </div>
+                        </div>
+                        <div class="form-group row" *ngIf="planPreventif.interne == 'oui'" style="margin-top: -20px;">
+                            <label for="technicien" class="col-sm-3 col-form-label"
+                                style="margin-top: 10px;">Technicien</label>
+                            <app-autocomplete class="col-sm-9 col-form-label"
+                                (addElementEvent)="setTechnicienID($event)" [keySelected]="keySelectedTechnicien"
+                                [objet]="objetTechnicien" [articles]="allTechniciens" idHtml="ajoutTechnicien"
+                                (openAddElementEvent)="ajoutTechnicien()">
+                            </app-autocomplete>
+                            <label for="technicien" class="col-sm-3 col-form-label">Techniciens</label>
+                            <div class="col-sm-9">
+                                <span *ngFor="let key of planPreventif.techniciens"> {{key.nom}} <span class="fermer"
+                                        (click)="supprimerTechnicien(key.id)">X</span></span>
+                            </div>
+                        </div>
+                        <div class="form-group row" *ngIf="planPreventif.interne == 'non'" style="margin-top: -20px;">
+                            <label for="fournisseur" class="col-sm-3 col-form-label"
+                                style="margin-top: 10px;">Fournisseur</label>
+                            <app-autocomplete class="col-sm-9 col-form-label"
+                                (addElementEvent)="setFournisseurID($event)" [keySelected]="keySelectedFournisseur"
+                                [objet]="objetFournisseur" [articles]="allFournisseurs"
+                                [idSelected]="planPreventif.fournisseur" idHtml="ajoutFournisseur"
+                                (openAddElementEvent)="openModalAjoutFournisseur()">
+                            </app-autocomplete>
+                        </div>
+                        <div class="form-group row" style="margin-top: -8px;">
+                            <label for="notes" class="col-sm-3 col-form-label">Notes</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="notes" name="notes" [(ngModel)]="planPreventif.notes"
+                                    placeholder="Notes"></textarea>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr />
+            <!--  Partie Date des Taches -->
+            <div class="row" style="margin-left: 100px;">
+                <div class="col-md-6">
+                    <app-filtre-date-button (getDatee)="getTaches($event)"></app-filtre-date-button>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label for="periodicite" class="col-sm-1 col-form-label">Periodicite</label>
+                        <div class="col-sm-5">
+                            <app-autocomplete (addElementEvent)="setPeriodiciteID($event)"
+                                [keySelected]="keySelectedPeriodicite" [objet]="objetPeriodicite"
+                                [bordureRed]="erreurPlanPreventif.periodicite != 0" [articles]="allPeriodicites"
+                                [idSelected]="planPreventif.periodicite" idHtml="ajoutPeriodicite"
+                                (openAddElementEvent)="openModalAjoutPeriodicite()">
+                            </app-autocomplete>
+                            <p *ngIf="erreurPlanPreventif.periodicite != 0" class="erreur">
+                                {{erreurPlanPreventif.periodicite}}</p>
+                        </div>
+                        <button class="BtnD" (click)="open(content)" *ngIf="planPreventif.listTaches.length>0">
+                            Décalage des taches
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--  Partie Liste Taches -->
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-striped" id="output">
+                        <thead>
+                            <tr>
+                                <th *ngFor="let key of objectKeys(itemsVariable)">
+                                    <div class="th-tableau">
+                                        {{key}}
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of planPreventif.listTaches">
+                                <td *ngFor="let key of objectKeys(itemsVariable)">
+                                    <span *ngIf="key=='dateExecution'">{{item[key]}}</span>
+                                    <span *ngIf="key=='numero'">{{item[key]}}</span>
+                                    <div *ngIf="key=='etatTache'">
+                                        <app-autocomplete (addElementEvent)="setEtatTacheID($event)"
+                                            [keySelected]="keySelectedEtatTache" [objet]="objetEtatTache"
+                                            [articles]="allEtatTaches" [idSelected]="item[key]" [idHtml]="item.numero">
+                                        </app-autocomplete>
+                                    </div>
+                                    <div *ngIf="key=='personnel'">
+                                        <div class="form-group row" *ngIf="planPreventif.interne == 'oui'" style="margin-left: 20px;">
+                                                <span *ngFor="let key of planPreventif.techniciens"> {{key.nom}} <span
+                                                        class="fermer"
+                                                        (click)="supprimerTechnicien(key.id)">X</span></span>
+                                        </div>
+                                        <div class="form-group row" *ngIf="planPreventif.interne == 'non'">
+                                            <app-autocomplete class="col-sm-9 col-form-label"
+                                                (addElementEvent)="setFournisseurID($event)" [keySelected]="keySelectedFournisseur"
+                                                [objet]="objetFournisseur" [articles]="allFournisseurs"
+                                                [idSelected]="planPreventif.fournisseur" [idHtml]="item.numero+10"
+                                                (openAddElementEvent)="openModalAjoutFournisseur()">
+                                            </app-autocomplete>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </app-card>
+    </div>
+</div>
+
+<app-add-element-modal-gmao [isLoading]="isLoading" [isOpenModalAjoutElement]="isOpenModalAjoutElement"
+    [idAjoutElementModal]="idAjoutElementModal" (closeModalAjoutElement)="closeModalAjoutElement()"
+    [typeElement]="typeElement"></app-add-element-modal-gmao>

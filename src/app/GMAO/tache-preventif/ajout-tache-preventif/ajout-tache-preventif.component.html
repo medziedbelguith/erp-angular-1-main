@@ -1,0 +1,111 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card [hidHeader]="true">
+            <!-- Partie Header -->
+            <div class="form-group row">
+                <div class="text-titre">
+                    <h3>Ajouter tache préventif</h3>
+                </div>
+                <div class="left-button" style="margin-left: auto;">
+                    <button *ngIf="!isLoading" class="btn btn-primary" type="button" (click)="ajoutTachePreventif()">
+                        Enregister
+                    </button>
+                    <button *ngIf="isLoading" class="btn btn-primary" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Chargement...
+                    </button>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <!-- Partie formulaire à Gauche en haut -->
+                <div class="col-md-6">
+                    <form action="javascript:">
+                        <div class="form-group row">
+                            <label for="planPreventif" class="col-sm-3 col-form-label">Plan Preventif</label>
+                            <div class="col-sm-9">
+                                <app-autocomplete (addElementEvent)="setPlanPreventifID($event)"
+                                    [keySelected]="keySelectedPlanPreventif" [objet]="objetPlanPreventif"
+                                    [bordureRed]="erreurTachePreventif.planPreventif != ''"
+                                    [articles]="allPlanPreventifs" [idSelected]="tachePreventif.planPreventif"
+                                    idHtml="ajouterPlanPreventif" (openAddElementEvent)="openModalAjoutPlanPreventif()">
+                                </app-autocomplete> 
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="dateExecution" class="col-sm-3 col-form-label">Date Execut°</label>
+                            <div class="col-sm-9">
+                                <input type="date" class="form-control" id="dateExecution" name="dateExecution"
+                                    [(ngModel)]="tachePreventif.dateExecution">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="personnel" class="col-sm-3 col-form-label">Personnel</label>
+                            <div class="col-sm-9">
+                                <app-autocomplete (addElementEvent)="setPersonnelID($event)"
+                                    [keySelected]="keySelectedPersonnel" [objet]="objetPersonnel"
+                                    [articles]="allPersonnels" [idSelected]="tachePreventif.personnel"
+                                    idHtml="ajouterPersonnel" (openAddElementEvent)="openModalAjoutPersonnel()">
+                                </app-autocomplete>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="machine" class="col-sm-3 col-form-label">Machine</label>
+                            <div class="col-sm-9">
+                                <app-autocomplete (addElementEvent)="setMachineID($event)"
+                                    [keySelected]="keySelectedMachine" [objet]="objetMachine"
+                                    [bordureRed]="erreurTachePreventif.machine != ''"
+                                    [articles]="allMachines" [idSelected]="tachePreventif.machine"
+                                    idHtml="ajouterMachine" (openAddElementEvent)="openModalAjoutMachine()">
+                                </app-autocomplete>
+                                <p *ngIf="erreurTachePreventif.machine != ''" class="erreur">
+                                    {{erreurTachePreventif.machine}}</p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Partie formulaire à Droite en haut -->
+                <div class="col-md-6">
+                    <form action="javascript:">
+                        <div class="form-group row">
+                            <label for="etatTache" class="col-sm-3 col-form-label">Etat Tache</label>
+                            <div class="col-sm-9">
+                                <app-autocomplete (addElementEvent)="setEtatTacheID($event)"
+                                    [keySelected]="keySelectedEtatTache" [objet]="objetEtatTache"
+                                    [bordureRed]="erreurTachePreventif.etatTache != ''"
+                                    [articles]="allEtatTaches" [idSelected]="tachePreventif.etatTache"
+                                    idHtml="ajouterEtatTache" (openAddElementEvent)="openModalAjoutEtatTache()">
+                                </app-autocomplete>
+                                <p *ngIf="erreurTachePreventif.etatTache != ''" class="erreur">
+                                    {{erreurTachePreventif.etatTache}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="montant" class="col-sm-3 col-form-label">Montant</label>
+                            <div class="col-sm-9 collapse-input">
+                                <input type="number" class="form-control desactive-text-input" id="montant"
+                                    name="montant" [(ngModel)]="tachePreventif.montant" (focus)="showInput($event)">
+                                <span class="form-control desactive-text-span" (click)="showInput($event)"
+                                    name="montant">{{fonctionPartagesService.getFormaThreeAfterVerguleNomber(tachePreventif.montant)}}
+                                </span>
+                                <p *ngIf="erreurTachePreventif.montant != 0" class="erreur">
+                                    {{erreurTachePreventif.montant}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="notes" class="col-sm-3 col-form-label">Notes</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="notes" name="notes" [(ngModel)]="tachePreventif.notes"
+                                    placeholder="Notes"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </app-card>
+    </div>
+</div>
+
+<app-add-element-modal-gmao [isLoading]="isLoading" [isOpenModalAjoutElement]="isOpenModalAjoutElement"
+[idAjoutElementModal]="idAjoutElementModal" (closeModalAjoutElement)="closeModalAjoutElement()" 
+[typeElement]="typeElement"></app-add-element-modal-gmao>

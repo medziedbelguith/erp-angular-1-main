@@ -1,0 +1,130 @@
+<div class="row">
+
+    <div class="col-sm-12">
+        <app-card [hidHeader]="true">
+            <!-- Partie Header -->
+            <div class="form-group row" style="justify-content: space-between !important; margin: 0px;">
+                <div class="text-titre">
+                    <h3>Modifier Projet Interne</h3>
+                </div>
+                <div class="left-button">
+                    <button *ngIf="!isLoading" class="btn btn-primary" (click)="modifierProjetInterne()">
+                        Modifier
+                    </button>
+                    <button *ngIf="isLoading" class="btn btn-primary" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Chargement...
+                    </button>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <!-- Partie formulaire à Gauche en haut -->
+                <div class="col-sm-6">
+                    <form action="javascript:">
+                        <div class="form-group row">
+                            <label for="reference" class="col-sm-4 col-form-label">reference</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="reference" id="reference"
+                                    placeholder="Exemple: BL21-00001" [(ngModel)]="projetInterne.reference">
+                                <p *ngIf="erreurProjetInterne.reference != ''" class="erreur">
+                                    {{erreurProjetInterne.reference}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="libelle" class="col-sm-4 col-form-label">libelle</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="libelle" id="libelle"
+                                    [(ngModel)]="projetInterne.libelle">
+                                <p *ngIf="erreurProjetInterne.libelle != ''" class="erreur">
+                                    {{erreurProjetInterne.libelle}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="date" class="col-sm-4 col-form-label">dateDebut</label>
+                            <div class="col-sm-8">
+                                <input type="date" class="form-control" id="dateDebut" name="dateDebut"
+                                    [(ngModel)]="projetInterne.dateDebut">
+                                <p *ngIf="erreurProjetInterne.dateDebut != ''" class="erreur">
+                                    {{erreurProjetInterne.dateDebut}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="date" class="col-sm-4 col-form-label">dateFin</label>
+                            <div class="col-sm-8">
+                                <input type="date" class="form-control" id="dateFin" name="dateFin"
+                                    [(ngModel)]="projetInterne.dateFin">
+                                <p *ngIf="erreurProjetInterne.dateFin != ''" class="erreur">
+                                    {{erreurProjetInterne.dateFin}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="tiers" class="col-sm-4 col-form-label">statutOpportunite</label>
+                            <div class="col-sm-8">
+                                <app-autocomplete (addElementEvent)="setStatutOpportuniteID($event)"
+                                    [keySelected]="keySelectedStatutOpportunite" [objet]="objetStatutOpportunite"
+                                    [articles]="allStatutOpportunites" [idSelected]="projetInterne.statutOpportunite"
+                                    [idHtml]="28"></app-autocomplete>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <!-- Partie formulaire à Droite en haut -->
+                <div class="col-md-6">
+                    <form action="javascript:">
+                        <div class="form-group row">
+                            <label for="prob" class="col-sm-4 col-form-label">probabilite Opportunite</label>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control" id="probabiliteOpportunite"
+                                    name="probabiliteOpportunite" [(ngModel)]="projetInterne.probabiliteOpportunite">
+                                <p *ngIf="erreurProjetInterne.probabiliteOpportunite != ''" class="erreur">
+                                    {{erreurProjetInterne.probabiliteOpportunite}}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="mantantOpportunite" class="col-sm-4 col-form-label">mantantOpportunite</label>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control" id="mantantOpportunite"
+                                    name="mantantOpportunite" [(ngModel)]="projetInterne.mantantOpportunite">
+                                <p *ngIf="erreurProjetInterne.mantantOpportunite != ''" class="erreur">
+                                    {{erreurProjetInterne.mantantOpportunite}}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="budget" class="col-sm-4 col-form-label">budget</label>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control" id="budget" name="budget"
+                                    [(ngModel)]="projetInterne.budget">
+                                <p *ngIf="erreurProjetInterne.budget != ''" class="erreur">
+                                    {{erreurProjetInterne.budget}}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="tauxAvancement" class="col-sm-4 col-form-label">tauxAvancement</label>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control" id="tauxAvancement" name="tauxAvancement"
+                                    [(ngModel)]="projetInterne.tauxAvancement">
+                                <p *ngIf="erreurProjetInterne.tauxAvancement != ''" class="erreur">
+                                    {{erreurProjetInterne.tauxAvancement}}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="description" class="col-sm-4 col-form-label">description</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="description" id="description"
+                                    [(ngModel)]="projetInterne.description">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </app-card>
+    </div>
+</div>

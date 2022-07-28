@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-sm-12">
+       <app-card [hidHeader]="true">
+            <!-- Partie Header -->
+            <div class="row">
+                <!-- Partie formulaire à Gauche en haut -->
+                <div class="col-md-12">
+                    <form action="javascript:">
+                        <div class="form-group row">
+                            <label for="exercice" class="col-sm-4 col-form-label">Exercice :</label>
+                            <div class="col-sm-8">
+                                <input type="input" class="form-control" name="exercice" id="exercice"
+                                 [(ngModel)]="exercice.exercice">
+                                <p *ngIf="erreurExercice.exercice != ''" class="erreur">{{erreurExercice.exercice}}</p>
+                            </div>
+                        </div>  
+                        
+                        <div class="form-group row">
+                            <label for="exercice" class="col-sm-4 col-form-label">En cours :</label>
+                            <div class="col-sm-8">
+                                 <input type="checkbox" style="margin-top: 10px;" name="isEnCours" id="isEnCours" (click)="clickIsEnCours()" [checked]="exercice.isEnCours == 'oui'">
+                            </div>
+                        </div>    
+
+                    </form>
+                </div>
+            
+                <hr *ngIf="isPopup" style="width: 100%; margin-top: 10px; margin-bottom: 5px;">
+  
+                <div *ngIf="isPopup" style="padding: 10px; text-align: right; padding-top:0px; padding-bottom:0px; width: 100%;">
+                  
+                    <button *ngIf="!isLoading" class="btn btn-primary" type="button" (click)="modifierExercice()">
+                        Modifier
+                    </button>
+                    <button *ngIf="isLoading" class="btn btn-primary" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Chargement...
+                    </button>
+                    
+              
+                </div>
+            </div>
+
+         
+        </app-card>
+    </div>
+</div>

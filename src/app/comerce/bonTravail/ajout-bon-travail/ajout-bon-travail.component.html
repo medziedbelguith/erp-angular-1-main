@@ -1,0 +1,4 @@
+<app-controle-acces [avoirAccee]="informationGenerale.verifierAccee('ajouterBonTravail')"></app-controle-acces>
+
+
+<app-bon-travail-html *ngIf="informationGenerale.verifierAccee('ajouterBonTravail')"></app-bon-travail-html>

@@ -1,0 +1,131 @@
+
+<ng-template #contentM #item let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{titreCrud}} sous produit </h4>
+        <p type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </p>
+    </div>
+    <div class="modal-body">
+        <div class="form-group row">
+            <label for="" class="col-sm-3 col-form-label">Reference</label>
+            <div class="col-sm-9">
+                <select [(ngModel)]="sousProduit.reference" style="width: 100%; border-color: gray;">
+                    <!--<option *ngFor="let item of tauxTVAs" [value]="item.taux">{{item.taux}}</option>-->
+                </select>
+                <p *ngIf="erreurSousProduit.reference != ''" class="erreur">{{erreurSousProduit.reference}}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button *ngIf="titreCrud == 'Ajouter'" type="button" class="btn btn-primary"
+            (click)="enregistrerSousProduit()">{{titreCrud}}</button>
+        <button *ngIf="titreCrud == 'Modifier'" type="button" class="btn btn-primary"
+            (click)="modifierSousProduit() ">{{titreCrud}}</button>
+    </div>
+</ng-template>
+
+
+
+<div class="col-xl-14">
+    <div class="table-responsive">
+        <table class="table table-striped" id="output" style="width: 100%; overflow-x: auto;">
+            <thead>
+                <tr>
+                    <th *ngFor="let key of objectKeys(shemaArticle)">
+                        <div class="th-tableau">
+                            {{shemaArticle[key]}}
+                        </div>
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody *ngIf="inisialiserEmptyTab()">
+
+                <tr *ngFor="let item of articles" [style]="getStyle(item)">
+                    <td *ngFor="let key of objectKeys(shemaArticle)" >
+                        <div [style]="getStyleDropDown(item)">
+                            <span *ngIf="key == 'qteTheorique'"
+                                style="float:right; text-align: right;">{{fonctionPartagesService.getFormaThreeAfterVerguleNomber(item[key])}}</span>
+                            <span *ngIf="key == 'qteEnStock'"
+                                style="float:right; text-align: right;">{{fonctionPartagesService.getFormaThreeAfterVerguleNomber(item[key])}}</span>
+
+                            <span *ngIf="key == 'numero' && item[key] != 0">{{item[key]}}</span>
+                            <span *ngIf="key == 'reference'">{{item[key]}}</span>
+
+                            <span *ngIf="key == 'lot'">{{item[key]}}</span>
+                            <span *ngIf="key == 'designation'">{{item[key]}}</span>
+
+                            <div *ngIf="tabCoches.includes(key)">
+                                <div class="col-md-12">
+                                    <app-input-number-vergule [field]="item" key="{{key}}" idUnique="{{key+item['numero']+item['reference']+item['lot']}}" (change)="changePrixValidee()"></app-input-number-vergule>
+                                </div>
+                                <div class="col-md-12" *ngIf="'qteInv1' == key">
+                                    <input type="radio" [id]="item['article']+item['lot']+item['sousProduit']+key" [name]="item['article']+item['lot']+item['sousProduit']+key"
+                                        [checked]="item['qteInv1IsValid'] == 'oui'"
+                                        (change)="ajoutQTV(item['qteInv1'], item, 'qteInv1IsValid', 'qteInv2IsValid', 'qteInv3IsValid')">
+                                    <label [for]="item['article']+item['lot']+item['sousProduit']+key">QTV</label>
+                                </div>
+                                <div class="col-md-12" *ngIf="'qteInv2' == key">
+                                    <input type="radio" [id]="item['article']+item['lot']+item['sousProduit']+key" [name]="item['article']+item['lot']+item['sousProduit']+key"
+                                        [checked]="item['qteInv2IsValid'] == 'oui'"
+                                        (change)="ajoutQTV(item['qteInv2'], item, 'qteInv2IsValid', 'qteInv3IsValid', 'qteInv1IsValid')">
+                                    <label [for]="item['article']+item['lot']+item['sousProduit']+key">QTV</label>
+                                </div>
+                                <div class="col-md-12" *ngIf="'qteInv3' == key">
+                                    <input type="radio" [id]="item['article']+item['lot']+item['sousProduit']+key" [name]="item['article']+item['lot']+item['sousProduit']+key"
+                                        [checked]="item['qteInv3IsValid'] == 'oui'"
+                                        (change)="ajoutQTV(item['qteInv3'], item, 'qteInv3IsValid', 'qteInv2IsValid', 'qteInv1IsValid')">
+                                    <label [for]="item['article']+item['lot']+item['sousProduit']+key">QTV</label>
+                                </div>
+                            </div>
+                            <div *ngIf="tabQTV.includes(key)">
+
+                                <span id="qteInvValide" class="form-control" style="height: 29px; padding:2px;">
+                                    {{getNumber(item['qteInvValide'])}}
+                                </span>
+
+                            </div>
+
+                            <div *ngIf="tabNumbers.includes(key)" class="col-sm-12">
+                                <app-input-number-vergule [field]="item" key="{{key}}" idUnique="{{key+item['numero']+item['reference']+item['lot']}}" ></app-input-number-vergule>
+                            </div>
+                            <div *ngIf="key == 'notes'" class=" collapse-input" style="width: 150px;">
+                                <input type="text" class="form-control" name="notes" id="notes"
+                                    [(ngModel)]="item.notes">
+                            </div>
+                        </div>
+                    </td>
+
+                    <td>
+                        <button class="btn btn-icon btn-outline-success" style="margin-right: 5px;"
+                            *ngIf="item.numero != 0" (click)="dropDown(item.numero)" title="Afficher Sous Produits">
+                            <i class="fa fa-caret-up" *ngIf="item.isShow == 1"></i> <i class="fa fa-caret-down"
+                                *ngIf="item.isShow == 0"></i>
+
+                        </button>
+
+                    </td>
+
+
+                </tr>
+
+
+
+                <tr *ngFor="let item of tabEmpty">
+                    <td colspan="30">
+                        <span style="color:transparent;">i</span>
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+    </div>
+
+    <app-spinner2 *ngIf="isLoading"></app-spinner2>
+
+</div>

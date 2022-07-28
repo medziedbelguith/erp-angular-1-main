@@ -1,0 +1,87 @@
+<div class="col-sm-12">
+    <app-card cardTitle="Liste classement des clients" blockClass="table-border-style">
+        <form [formGroup]="formC">
+            <div class="form-group row">
+                <div class="pagination-inner">
+                    <app-filtre-date (setNewDates)="getClients($event)"></app-filtre-date>
+                </div>
+                <label for="secteur" class="col-md-1 form-group">Secteur</label>
+
+                <select class="col-md-2 form-control" (change)="setSecteurActiviteID($event)">
+                    <option *ngFor="let item of allSecteurs" [value]="item.typeS">{{item.typeS}}</option>
+                </select>
+            </div>
+            <div class="category-page-wrapper">
+                <div class="result-inner">
+                    <!--Showing 1 to 8 of 10 (2 Pages)-->
+                </div>
+                <div class="pagination-inner">
+                    <div class="th-tableau2" style="margin-top:5px; margin-left: auto;">
+
+                        <select class="form-control form-control-sm"
+                            style="font-size: 12px; max-width: 58px; padding-left: 3px;" formControlName="limit"
+                            (change)="getClients(request)">
+                            <option value=3>3</option>
+                            <option value=4>4</option>
+                            <option value=5>5</option>
+                            <option value=10>10</option>
+                        </select>
+
+                        <button (click)="getClients(request)" class="btn btn-info ng-tns-c112-14"
+                            style="font-size: 15px; padding:2px; height: 30px; display: inline-block; white-space: nowrap; margin-left: 3px;"
+                            type=submit>
+                            <i class="feather icon-search"></i>
+                        </button>
+
+                        <div style="margin-left:auto;">
+                            <app-showelements [items]="items" [itemsVariable]="itemsVariable"></app-showelements>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped" id="output">
+                    <thead>
+                        <tr class="rechercherligne">
+
+                            <th *ngFor="let key of objectKeys(itemsVariable)">
+                                <div class="form-group">
+                                    <input type="text" placeholder="Recherche" class="form-control"
+                                        [formControlName]="key">
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        <tr>
+                            <th *ngFor="let key of objectKeys(itemsVariable)">
+                                <div class="th-tableau" (click)="changeCroissante(key)">
+                                    {{key}}
+                                    <div class="buttons-croissante">
+
+                                        <i class="fas fa-caret-up croissante {{key}}-croissante"></i>
+                                        <i class="fas fa-caret-down croissante {{key}}-croissante"></i>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of clients">
+                            <td *ngFor="let key of objectKeys(itemsVariable)">
+                                <span *ngIf="['chiffreAffaire'].includes(key) != true">{{item[key]}}</span>
+                                <span
+                                    *ngIf="key == 'chiffreAffaire'">{{fonctionPartagesService.getFormaThreeAfterVerguleNomber(item[key])}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <app-spinner2 *ngIf="isLoading"></app-spinner2>
+            <hr>
+            <app-pagination [page]="request.page" [totalPage]="totalPage" (setPageEvent)="setPage($event)">
+            </app-pagination>
+        </form>
+    </app-card>
+</div>

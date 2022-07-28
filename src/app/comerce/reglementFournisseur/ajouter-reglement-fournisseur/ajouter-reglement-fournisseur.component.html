@@ -1,0 +1,106 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card [hidHeader]="true">
+            <!-- Partie Header -->
+            <div class="form-group row">
+                <div class="text-titre">
+                    <h3>Ajouter un Règlement Fournisseur</h3>
+                </div>
+                <div class="left-button">
+                    <button *ngIf="!isLoading" class="btn btn-primary" type="button" (click)="ajoutReglement()">
+                        Enregister
+                    </button>
+                    <button *ngIf="isLoading" class="btn btn-primary" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Chargement...
+                    </button>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <!-- Partie formulaire à Gauche en haut -->
+                <div class="col-md-6">
+                    <form action="javascript:">
+                        
+                        <div class="form-group row">
+                            <label for="tresorerie" class="col-sm-4 col-form-label">Tresorerie</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="tresorerie" id="tresorerie"
+                                    placeholder="Enter tresorerie" [(ngModel)]="reglement.tresorerie">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="montant" class="col-sm-4 col-form-label">Montant</label>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control" name="montant" id="montant"
+                                    placeholder="Enter montant" [(ngModel)]="reglement.montant">
+                                    
+                                <p *ngIf="erreurReglement.montant != ''" class="erreur">{{erreurReglement.montant}}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="numCheque" class="col-sm-4 col-form-label">Numero de cheque</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="numCheque" id="numCheque"
+                                    placeholder="Enter numCheque" [(ngModel)]="reglement.numCheque">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="dateEcheance" class="col-sm-4 col-form-label">Date echeance</label>
+                            <div class="col-sm-8">
+                                <input type="date" class="form-control" name="dateEcheance" id="dateEcheance"
+                                    placeholder="Enter dateEcheance" [(ngModel)]="reglement.dateEcheance">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="notes" class="col-sm-4 col-form-label">Notes</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="notes" id="notes"
+                                    placeholder="Enter notes" [(ngModel)]="reglement.notes">
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+                <div class="col-md-6">
+                    <form action="javascript:">
+                        
+                      
+                        <div class="form-group row">
+                            <label for="Fournisseur" class="col-sm-4 col-form-label">Fournisseur</label>
+                            <div class="col-sm-8">
+                                <app-autocomplete (addElementEvent)="setFournisseurID($event)"
+                                    [keySelected]="keySelectedFournisseur" [objet]="objetFournisseur"
+                                    [articles]="allFournisseurs" [idSelected]="reglement.fournisseur" [idHtml]="2">
+                                </app-autocomplete>
+
+                                
+                                <p *ngIf="erreurReglement.fournisseur != ''" class="erreur">{{erreurReglement.fournisseur}}</p>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="modeReglement" class="col-sm-4 col-form-label">Mode de reglement</label>
+                            <div class="col-sm-8">
+                                <app-autocomplete (addElementEvent)="setModeReglementID($event)"
+                                    [keySelected]="keySelectedModeReglement" [objet]="objetModeReglement"
+                                    [articles]="allModeReglements" [idSelected]="reglement.modeReglement" [idHtml]="3">
+                                </app-autocomplete>
+
+                                <p *ngIf="erreurReglement.modeReglement != ''" class="erreur">{{erreurReglement.modeReglement}}</p>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <!-- Partie formulaire à Droite en haut -->
+            </div>
+        </app-card>
+    </div>
+</div>

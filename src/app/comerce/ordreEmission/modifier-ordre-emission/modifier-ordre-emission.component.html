@@ -1,0 +1,118 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card [hidHeader]="true">
+            <!-- Partie Header -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <div class="col-md-12">
+
+                            <div class="form-group row">
+                                <label for="numero" class="col-sm-4 col-form-label">Numero</label>
+                                <div class="col-sm-8 collapse-input">
+                                    <span class="form-control desactive-text-span"
+                                        name="numero">{{ordreEmission.numero}}</span>
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+
+                                <label for="budget" class="col-sm-4 col-form-label">budget</label>
+                                <div class="col-sm-8">
+                                    <app-input-number-vergule [field]="ordreEmission" key="budget" idUnique="budget2"
+                                        [messageErreur]="erreurOrdreEmission.budget"></app-input-number-vergule>
+
+                                    <p *ngIf="erreurOrdreEmission.budget != ''" class="erreur">
+                                        {{erreurOrdreEmission.budget}}
+                                    </p>
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+
+
+                                <label for="trajet" class="col-sm-4 col-form-label">trajet</label>
+                                <div class="col-sm-8">
+
+                                    <app-input-number-vergule [field]="ordreEmission" key="trajet" idUnique="trajet2"
+                                        [messageErreur]="erreurOrdreEmission.trajet"></app-input-number-vergule>
+
+                                    <p *ngIf="erreurOrdreEmission.trajet != ''" class="erreur">
+                                        {{erreurOrdreEmission.trajet}}
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <div class="col-md-12">
+
+                            <div class="form-group row">
+
+                                <label for="camion" class="col-sm-4 col-form-label">camion</label>
+                                <div class="col-sm-8">
+                                    <input type="input" class="form-control" name="camion" id="camion"
+                                        [(ngModel)]="ordreEmission.camion">
+                                    <p *ngIf="erreurOrdreEmission.camion != ''" class="erreur">
+                                        {{erreurOrdreEmission.camion}}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+
+                                <label for="chauffeur" class="col-sm-4 col-form-label">chauffeur</label>
+                                <div class="col-sm-8">
+                                    <app-autocomplete [bordureRed]="erreurOrdreEmission.chauffeur != ''" 
+                                    (addElementEvent)="setChauffeur($event)" [keySelected]="keySelectedChauffeur" 
+                                    [objet]="objetChauffeur" [articles]="allChauffeurs" [idSelected]="ordreEmission.chauffeur" 
+                                    [idHtml]="25" (openAddElementEvent)="openModalAjoutChauffeur()"></app-autocomplete>
+                                    <p *ngIf="erreurOrdreEmission.chauffeur != ''" class="erreur">
+                                        {{erreurOrdreEmission.chauffeur}}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="bonLivraison" class="col-sm-4 col-form-label">BonLivraison</label>
+                                <div class="col-sm-8">
+                                    <select  class="form-control" name="bonLivraison" id="bonLivraison" [(ngModel)]="ordreEmission.bonLivraison">
+                                        <option *ngFor='let item of bonLivraisons' [value]="item.numero">{{item.numero}}</option>
+                                    </select>
+                                    <p *ngIf="erreurOrdreEmission.bonLivraison != ''" class="erreur">
+                                        {{erreurOrdreEmission.bonLivraison}}
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <hr style="width: 100%; margin-top: 10px; margin-bottom: 5px;">
+
+                <div style="padding: 10px; text-align: right; padding-top:0px; padding-bottom:0px; width: 100%;">
+
+                    <button *ngIf="!isLoading" class="btn btn-primary" (click)="ModifierOrdreEmission()">
+                        Enregister
+                    </button>
+                    <button *ngIf="isLoading" class="btn btn-primary" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Chargement...
+                    </button>
+
+                </div>
+
+
+            </div>
+        </app-card>
+    </div>
+</div>
+
+<app-add-element-modal [isLoading]="isLoading" [isOpenModalAjoutElement]="isOpenModalAjoutElement"
+    [idAjoutElementModal]="idAjoutElementModal" (closeModalAjoutElement)="closeModalAjoutElement()"
+    [typeElement]="typeElement"></app-add-element-modal>
